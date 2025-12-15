@@ -1777,14 +1777,11 @@
                 ctx.lineTo(x, lowY);
                 ctx.stroke();
                 
-                // Body with glow
-                ctx.shadowColor = isGreen ? cyanColor : pinkColor;
-                ctx.shadowBlur = 8;
+                // Body
                 ctx.fillStyle = isGreen ? cyanColor : pinkColor;
                 const bodyTop = Math.min(openY, closeY);
                 const bodyHeight = Math.max(1, Math.abs(closeY - openY));
                 ctx.fillRect(x - candleWidth / 2, bodyTop, candleWidth, bodyHeight);
-                ctx.shadowBlur = 0;
             });
             
             // Volume bars
