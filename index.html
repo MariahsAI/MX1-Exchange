@@ -3602,7 +3602,19 @@
             // Switch to new symbol's live data
             if (symbol !== 'MX1') {
                 currentSymbol = symbol + 'USDT';
-                connectBinanceWebSocket(); // Reconnect with new symbol
+                
+                // Stop existing polling
+                if (pollingInterval) {
+                    clearInterval(pollingInterval);
+                    pollingInterval = null;
+                }
+                
+                // Fetch data immediately for new pair
+                fetchLiveData();
+                
+                // Reconnect WebSocket with new symbol
+                connectBinanceWebSocket();
+                
                 showToast('success', 'Pair Changed', `🔴 LIVE: ${symbol}/USDT`);
             } else {
                 showToast('success', 'Pair Changed', `${symbol}/USDT (Demo Mode)`);
@@ -3654,31 +3666,142 @@
         let lastPrice = 0;
 
         // ===== BINANCE WEBSOCKET =====
+        let wsConnected = false;
+        let pollingInterval = null;
+        
         function connectBinanceWebSocket() {
             // Close existing connection
             if (ws) ws.close();
             
             const symbol = currentSymbol.toLowerCase();
             
-            // Connect to Binance WebSocket for order book, trades, and ticker
-            ws = new WebSocket(`wss://stream.binance.com:9443/stream?streams=${symbol}@depth20@100ms/${symbol}@trade/${symbol}@ticker`);
-            
-            ws.onopen = () => {
-                console.log(`🟢 Connected to Binance WebSocket: ${currentSymbol}`);
-                showToast('success', 'Live Data', `Connected to ${currentSymbol} stream`);
-            };
-            
-            ws.onmessage = (event) => {
-                const data = JSON.parse(event.data);
+            try {
+                // Connect to Binance WebSocket for order book, trades, and ticker
+                ws = new WebSocket(`wss://stream.binance.com:9443/stream?streams=${symbol}@depth20@100ms/${symbol}@trade/${symbol}@ticker`);
                 
-                if (data.stream.includes('@depth')) {
-                    // Order book update
+                ws.onopen = () => {
+                    console.log(`🟢 Connected to Binance WebSocket: ${currentSymbol}`);
+                    showToast('success', 'Live Data', `Connected to ${currentSymbol} stream`);
+                    wsConnected = true;
+                    // Stop polling if we have WebSocket
+                    if (pollingInterval) {
+                        clearInterval(pollingInterval);
+                        pollingInterval = null;
+                    }
+                };
+                
+                ws.onmessage = (event) => {
+                    const data = JSON.parse(event.data);
+                    
+                    if (data.stream && data.stream.includes('@depth')) {
+                        // Order book update
+                        liveOrderBook = {
+                            bids: data.data.bids.slice(0, 8).map(([price, amount]) => ({
+                                price: parseFloat(price),
+                                amount: parseFloat(amount)
+                            })),
+                            asks: data.data.asks.slice(0, 8).map(([price, amount]) => ({
+                                price: parseFloat(price),
+                                amount: parseFloat(amount)
+                            }))
+                        };
+                        renderLiveOrderBook();
+                        drawLiveDepthChart();
+                    }
+                    
+                    if (data.stream && data.stream.includes('@trade')) {
+                        // New trade - update header price
+                        const trade = data.data;
+                        const price = parseFloat(trade.p);
+                        
+                        updateHeaderPrice(price);
+                        
+                        addLiveTrade({
+                            price: price,
+                            amount: parseFloat(trade.q),
+                            isBuy: !trade.m,
+                            time: new Date(trade.T).toLocaleTimeString()
+                        });
+                    }
+                    
+                    if (data.stream && data.stream.includes('@ticker')) {
+                        // 24h ticker update - update header stats
+                        const ticker = data.data;
+                        updateHeaderStats({
+                            price: parseFloat(ticker.c),
+                            change: parseFloat(ticker.P),
+                            high: parseFloat(ticker.h),
+                            low: parseFloat(ticker.l),
+                            volume: parseFloat(ticker.v),
+                            quoteVolume: parseFloat(ticker.q)
+                        });
+                    }
+                };
+                
+                ws.onerror = (error) => {
+                    console.log('🔴 WebSocket error, starting REST API polling');
+                    wsConnected = false;
+                    startPolling();
+                };
+                
+                ws.onclose = () => {
+                    console.log('🟡 WebSocket closed');
+                    wsConnected = false;
+                    // Start polling as backup
+                    startPolling();
+                    // Try to reconnect WebSocket after 5s
+                    setTimeout(connectBinanceWebSocket, 5000);
+                };
+            } catch (e) {
+                console.log('WebSocket not supported, using REST API');
+                startPolling();
+            }
+        }
+
+        // REST API Polling (fallback when WebSocket fails)
+        function startPolling() {
+            if (pollingInterval) return; // Already polling
+            
+            console.log('📊 Starting REST API polling...');
+            showToast('info', 'Fallback Mode', 'Using REST API updates');
+            
+            // Poll immediately
+            fetchLiveData();
+            
+            // Then poll every 2 seconds
+            pollingInterval = setInterval(fetchLiveData, 2000);
+        }
+
+        async function fetchLiveData() {
+            try {
+                // Fetch ticker data
+                const tickerRes = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${currentSymbol}`);
+                const ticker = await tickerRes.json();
+                
+                if (ticker && ticker.lastPrice) {
+                    const price = parseFloat(ticker.lastPrice);
+                    updateHeaderPrice(price);
+                    updateHeaderStats({
+                        price: price,
+                        change: parseFloat(ticker.priceChangePercent),
+                        high: parseFloat(ticker.highPrice),
+                        low: parseFloat(ticker.lowPrice),
+                        volume: parseFloat(ticker.volume),
+                        quoteVolume: parseFloat(ticker.quoteVolume)
+                    });
+                }
+                
+                // Fetch order book
+                const depthRes = await fetch(`https://api.binance.com/api/v3/depth?symbol=${currentSymbol}&limit=10`);
+                const depth = await depthRes.json();
+                
+                if (depth && depth.bids && depth.asks) {
                     liveOrderBook = {
-                        bids: data.data.bids.slice(0, 8).map(([price, amount]) => ({
+                        bids: depth.bids.slice(0, 8).map(([price, amount]) => ({
                             price: parseFloat(price),
                             amount: parseFloat(amount)
                         })),
-                        asks: data.data.asks.slice(0, 8).map(([price, amount]) => ({
+                        asks: depth.asks.slice(0, 8).map(([price, amount]) => ({
                             price: parseFloat(price),
                             amount: parseFloat(amount)
                         }))
@@ -3687,44 +3810,23 @@
                     drawLiveDepthChart();
                 }
                 
-                if (data.stream.includes('@trade')) {
-                    // New trade - update header price
-                    const trade = data.data;
-                    const price = parseFloat(trade.p);
-                    
-                    updateHeaderPrice(price);
-                    
+                // Fetch recent trades
+                const tradesRes = await fetch(`https://api.binance.com/api/v3/trades?symbol=${currentSymbol}&limit=5`);
+                const trades = await tradesRes.json();
+                
+                if (trades && trades.length > 0) {
+                    const latestTrade = trades[trades.length - 1];
                     addLiveTrade({
-                        price: price,
-                        amount: parseFloat(trade.q),
-                        isBuy: !trade.m,
-                        time: new Date(trade.T).toLocaleTimeString()
+                        price: parseFloat(latestTrade.price),
+                        amount: parseFloat(latestTrade.qty),
+                        isBuy: latestTrade.isBuyerMaker === false,
+                        time: new Date(latestTrade.time).toLocaleTimeString()
                     });
                 }
                 
-                if (data.stream.includes('@ticker')) {
-                    // 24h ticker update - update header stats
-                    const ticker = data.data;
-                    updateHeaderStats({
-                        price: parseFloat(ticker.c),
-                        change: parseFloat(ticker.P),
-                        high: parseFloat(ticker.h),
-                        low: parseFloat(ticker.l),
-                        volume: parseFloat(ticker.v),
-                        quoteVolume: parseFloat(ticker.q)
-                    });
-                }
-            };
-            
-            ws.onerror = (error) => {
-                console.log('🔴 WebSocket error, falling back to REST API');
-                fetchOrderBookREST();
-            };
-            
-            ws.onclose = () => {
-                console.log('🟡 WebSocket closed, reconnecting in 3s...');
-                setTimeout(connectBinanceWebSocket, 3000);
-            };
+            } catch (e) {
+                console.log('REST API fetch error:', e);
+            }
         }
 
         function updateHeaderPrice(price) {
@@ -4568,8 +4670,19 @@
             // Draw initial depth chart (will be updated by live data)
             drawDepthChart();
 
+            // Immediately fetch data via REST API
+            fetchLiveData();
+            
             // Connect to Binance WebSocket for LIVE data
             connectBinanceWebSocket();
+            
+            // Start polling as backup (will be stopped if WebSocket connects)
+            setTimeout(() => {
+                if (!wsConnected) {
+                    console.log('WebSocket not connected after 3s, starting polling...');
+                    startPolling();
+                }
+            }, 3000);
         }
 
         // ===== EPIC PARTICLE SYSTEM =====
