@@ -255,6 +255,7 @@
         nav {
             display: flex;
             gap: 8px;
+            margin-left: 40px;
         }
 
         nav a {
@@ -1194,7 +1195,7 @@
         /* TradingView Chart */
         .tradingview-widget {
             flex: 0 0 auto;
-            height: 760px;
+            height: 650px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 12px;
@@ -1325,12 +1326,25 @@
             border-radius: 6px;
         }
 
+        .ob-spread-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 12px;
+        }
+
         .ob-spread-price {
             font-family: 'JetBrains Mono', monospace;
             font-size: 16px;
             font-weight: 700;
             color: var(--cyan);
-            margin-right: 10px;
+        }
+
+        .ob-spread-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
         }
 
         .ob-spread-label {
@@ -2654,7 +2668,7 @@
                 border-radius: 0 0 12px 12px;
             }
             .tradingview-widget {
-                height: 400px;
+                height: 500px;
             }
             .depth-chart-container {
                 height: 80px;
@@ -3121,7 +3135,10 @@
                     </div>
                     <div id="asksList"></div>
                     <div class="ob-spread">
-                        <span class="ob-spread-price" id="spreadPrice">$88,500.00</span>
+                        <div class="ob-spread-main">
+                            <span class="ob-spread-price" id="spreadPrice">$88,500.00</span>
+                            <span class="ob-spread-time" id="spreadTime">00:00</span>
+                        </div>
                         <span class="ob-spread-label" id="spreadValue">Spread: 0.02%</span>
                     </div>
                     <div id="bidsList"></div>
@@ -4225,6 +4242,18 @@
             if (spreadValueEl) {
                 spreadValueEl.textContent = `Spread: ${spreadPercent}%`;
             }
+            
+            // Update timestamp
+            const spreadTimeEl = document.getElementById('spreadTime');
+            if (spreadTimeEl) {
+                const now = new Date();
+                spreadTimeEl.textContent = now.toLocaleTimeString('en-US', { 
+                    hour12: false, 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+            }
         }
 
         function addLiveTrade(trade) {
@@ -4435,9 +4464,13 @@
                     "toolbar_bg": "#0f0f1e",
                     "enable_publishing": false,
                     "hide_side_toolbar": false,
+                    "hide_top_toolbar": false,
+                    "hide_legend": false,
                     "allow_symbol_change": true,
                     "container_id": "tradingview_chart",
                     "hide_volume": false,
+                    "withdateranges": true,
+                    "save_image": false,
                     "backgroundColor": "#0f0f1e",
                     "gridColor": "rgba(0, 212, 255, 0.1)",
                     "overrides": {
@@ -4451,7 +4484,9 @@
                         "mainSeriesProperties.candleStyle.borderDownColor": "#ff1493",
                         "mainSeriesProperties.candleStyle.wickUpColor": "#00d4ff",
                         "mainSeriesProperties.candleStyle.wickDownColor": "#ff1493",
-                        "volumePaneSize": "small"
+                        "volumePaneSize": "small",
+                        "scalesProperties.showSeriesLastValue": true,
+                        "mainSeriesProperties.showCountdown": true
                     },
                     "studies_overrides": {
                         "volume.volume.color.0": "#ff1493",
