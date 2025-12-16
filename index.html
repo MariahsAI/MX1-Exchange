@@ -2997,11 +2997,11 @@
 
                 <!-- Scrollable stats container -->
                 <div class="header-stats-scroll">
-                    <div class="current-price" id="currentPrice">104,250.00</div>
+                    <div class="current-price" id="currentPrice">88,500.00</div>
 
                     <div class="header-stat">
                         <span class="header-stat-label">24H Change</span>
-                        <span class="header-stat-value positive" id="priceChange">+2.15%</span>
+                        <span class="header-stat-value negative" id="priceChange">-2.15%</span>
                     </div>
 
                     <div class="header-stat">
@@ -3016,12 +3016,12 @@
 
                     <div class="header-stat">
                         <span class="header-stat-label">24H High</span>
-                        <span class="header-stat-value cyan" id="high24h">105,500.00</span>
+                        <span class="header-stat-value cyan" id="high24h">89,950.00</span>
                     </div>
 
                     <div class="header-stat">
                         <span class="header-stat-label">24H Low</span>
-                        <span class="header-stat-value pink" id="low24h">101,200.00</span>
+                        <span class="header-stat-value pink" id="low24h">85,300.00</span>
                     </div>
 
                     <div class="header-stat">
@@ -3106,7 +3106,7 @@
                     </div>
                     <div id="asksList"></div>
                     <div class="ob-spread">
-                        <span class="ob-spread-price" id="spreadPrice">$104,250.00</span>
+                        <span class="ob-spread-price" id="spreadPrice">$88,500.00</span>
                         <span class="ob-spread-label" id="spreadValue">Spread: 0.02%</span>
                     </div>
                     <div id="bidsList"></div>
@@ -3155,10 +3155,10 @@
                 <div class="form-group">
                     <div class="form-label">
                         <span>Price</span>
-                        <span id="priceApprox">≈ $104,250</span>
+                        <span id="priceApprox">≈ $88,500</span>
                     </div>
                     <div class="input-group">
-                        <input type="text" value="104250.00" id="priceInput">
+                        <input type="text" value="88500.00" id="priceInput">
                         <div class="input-suffix">USDT</div>
                     </div>
                 </div>
@@ -3425,15 +3425,15 @@
         // Initial mock data (replaced by live data)
         const tickerData = [
             { symbol: 'MX1', price: 2.385, change: 8.42 },
-            { symbol: 'BTC', price: 104250, change: 2.15 },
-            { symbol: 'ETH', price: 3920.50, change: -1.23 },
-            { symbol: 'SOL', price: 225.80, change: 5.67 },
-            { symbol: 'XRP', price: 2.45, change: -0.89 },
-            { symbol: 'DOGE', price: 0.412, change: 3.21 },
-            { symbol: 'ADA', price: 1.12, change: 1.45 },
-            { symbol: 'AVAX', price: 45.60, change: -2.34 },
-            { symbol: 'LINK', price: 28.90, change: 4.56 },
-            { symbol: 'DOT', price: 8.45, change: -0.78 }
+            { symbol: 'BTC', price: 88500, change: -2.15 },
+            { symbol: 'ETH', price: 3142.50, change: -1.23 },
+            { symbol: 'SOL', price: 218.80, change: -3.67 },
+            { symbol: 'XRP', price: 2.38, change: -0.89 },
+            { symbol: 'DOGE', price: 0.395, change: -2.21 },
+            { symbol: 'ADA', price: 1.05, change: -1.45 },
+            { symbol: 'AVAX', price: 42.60, change: -2.34 },
+            { symbol: 'LINK', price: 26.90, change: -1.56 },
+            { symbol: 'DOT', price: 7.85, change: -0.78 }
         ];
 
         function initTicker() {
