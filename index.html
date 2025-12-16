@@ -4623,8 +4623,8 @@
         });
 
         // ===== SOCIAL SENTIMENT =====
-        // Simulated sentiment data (in production, this would come from LunarCrush or similar API)
-        const sentimentData = {
+        // Dynamic sentiment data that changes over time
+        let sentimentData = {
             BTC: { score: 78, trend: 'bullish', twitter: 82, reddit: 74, news: 71, telegram: 79 },
             ETH: { score: 72, trend: 'bullish', twitter: 75, reddit: 68, news: 70, telegram: 74 },
             SOL: { score: 85, trend: 'bullish', twitter: 89, reddit: 82, news: 80, telegram: 88 },
@@ -4637,6 +4637,36 @@
             MATIC: { score: 58, trend: 'neutral', twitter: 60, reddit: 55, news: 58, telegram: 59 },
             MX1: { score: 88, trend: 'bullish', twitter: 91, reddit: 85, news: 84, telegram: 90 }
         };
+
+        // Update sentiment values periodically (every 20 seconds)
+        function startSentimentUpdates() {
+            setInterval(() => {
+                // Update each coin's sentiment with small random changes
+                Object.keys(sentimentData).forEach(symbol => {
+                    const data = sentimentData[symbol];
+                    
+                    // Random walk for each source (-3 to +3)
+                    data.twitter = Math.max(5, Math.min(95, data.twitter + Math.floor(Math.random() * 7) - 3));
+                    data.reddit = Math.max(5, Math.min(95, data.reddit + Math.floor(Math.random() * 7) - 3));
+                    data.news = Math.max(5, Math.min(95, data.news + Math.floor(Math.random() * 7) - 3));
+                    data.telegram = Math.max(5, Math.min(95, data.telegram + Math.floor(Math.random() * 7) - 3));
+                    
+                    // Calculate new overall score as average
+                    data.score = Math.round((data.twitter + data.reddit + data.news + data.telegram) / 4);
+                    
+                    // Update trend based on score
+                    if (data.score >= 60) data.trend = 'bullish';
+                    else if (data.score <= 40) data.trend = 'bearish';
+                    else data.trend = 'neutral';
+                });
+                
+                // Update display if we're showing a coin
+                const currentSymbol = document.getElementById('sentimentSymbol')?.textContent;
+                if (currentSymbol && sentimentData[currentSymbol]) {
+                    updateSentiment(currentSymbol);
+                }
+            }, 20000); // Every 20 seconds
+        }
 
         function toggleSentimentDropdown() {
             const indicator = document.getElementById('sentimentIndicator');
@@ -4712,9 +4742,13 @@
         function initSentiment() {
             // Initialize with default symbol (BTC)
             updateSentiment('BTC');
+            // Start periodic updates
+            startSentimentUpdates();
         }
 
         // ===== WIDGETS =====
+        let currentFearGreed = 72;
+        
         async function initFearGreed() {
             // Show loading state
             document.getElementById('fgValue').textContent = '...';
@@ -4726,35 +4760,52 @@
                 
                 if (data && data.data && data.data[0]) {
                     const fgData = data.data[0];
-                    const value = parseInt(fgData.value);
+                    currentFearGreed = parseInt(fgData.value);
                     const classification = fgData.value_classification;
                     
-                    // Update display
-                    document.getElementById('fgValue').textContent = value;
-                    document.getElementById('fgNeedle').style.left = value + '%';
-                    document.getElementById('fgClassification').textContent = `(${classification})`;
-                    
-                    // Set color based on value
-                    let color = 'var(--cyan)';
-                    if (value < 25) color = '#ff1493'; // Extreme Fear - pink
-                    else if (value < 45) color = '#ff6b6b'; // Fear - red
-                    else if (value < 55) color = '#ffa500'; // Neutral - orange
-                    else if (value < 75) color = '#90EE90'; // Greed - light green
-                    else color = 'var(--cyan)'; // Extreme Greed - cyan
-                    
-                    document.getElementById('fgValue').style.color = color;
-                    
-                    console.log(`🎯 Fear & Greed Index: ${value} (${classification})`);
+                    updateFearGreedDisplay(currentFearGreed, classification);
+                    console.log(`🎯 Fear & Greed Index: ${currentFearGreed} (${classification})`);
                 }
             } catch (error) {
-                console.log('Fear & Greed API error, using fallback');
-                // Fallback to mock data
-                const value = 72;
-                document.getElementById('fgValue').textContent = value;
-                document.getElementById('fgNeedle').style.left = value + '%';
-                document.getElementById('fgValue').style.color = 'var(--cyan)';
-                document.getElementById('fgClassification').textContent = '(Greed)';
+                console.log('Fear & Greed API error, using simulation');
+                // Start with a random value between 20-80
+                currentFearGreed = Math.floor(Math.random() * 60) + 20;
+                updateFearGreedDisplay(currentFearGreed);
+                
+                // Simulate changes every 30 seconds
+                setInterval(() => {
+                    // Random walk: change by -3 to +3
+                    currentFearGreed += Math.floor(Math.random() * 7) - 3;
+                    // Keep in bounds 0-100
+                    currentFearGreed = Math.max(5, Math.min(95, currentFearGreed));
+                    updateFearGreedDisplay(currentFearGreed);
+                }, 30000);
             }
+        }
+
+        function updateFearGreedDisplay(value, classification = null) {
+            document.getElementById('fgValue').textContent = value;
+            document.getElementById('fgNeedle').style.left = value + '%';
+            
+            // Determine classification if not provided
+            if (!classification) {
+                if (value < 25) classification = 'Extreme Fear';
+                else if (value < 45) classification = 'Fear';
+                else if (value < 55) classification = 'Neutral';
+                else if (value < 75) classification = 'Greed';
+                else classification = 'Extreme Greed';
+            }
+            document.getElementById('fgClassification').textContent = `(${classification})`;
+            
+            // Set color based on value
+            let color = 'var(--cyan)';
+            if (value < 25) color = '#ff1493';
+            else if (value < 45) color = '#ff6b6b';
+            else if (value < 55) color = '#ffa500';
+            else if (value < 75) color = '#90EE90';
+            else color = 'var(--cyan)';
+            
+            document.getElementById('fgValue').style.color = color;
         }
 
         function initPortfolio() {
