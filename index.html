@@ -270,6 +270,262 @@
             gap: 12px;
         }
 
+        /* Social Sentiment Indicator */
+        .sentiment-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            margin-left: auto;
+            margin-right: 12px;
+        }
+
+        .sentiment-icon {
+            font-size: 18px;
+        }
+
+        .sentiment-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .sentiment-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sentiment-value {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sentiment-bar {
+            width: 80px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .sentiment-fill {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #8a2be2);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .sentiment-fill.bullish {
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .sentiment-fill.bearish {
+            background: linear-gradient(90deg, #ff1493, #ff6b6b);
+            box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+        }
+
+        .sentiment-fill.neutral {
+            background: linear-gradient(90deg, #ffa500, #ffcc00);
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+        }
+
+        .sentiment-percent {
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+        }
+
+        .sentiment-tag {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .sentiment-tag.bullish {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--cyan);
+        }
+
+        .sentiment-tag.bearish {
+            background: rgba(255, 20, 147, 0.2);
+            color: var(--pink);
+        }
+
+        .sentiment-tag.neutral {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+        }
+
+        .sentiment-arrow {
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+
+        .sentiment-indicator.open .sentiment-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Sentiment Dropdown */
+        .sentiment-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 8px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 16px;
+            display: none;
+            z-index: 1000;
+            min-width: 280px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .sentiment-indicator.open .sentiment-dropdown {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sentiment-dropdown-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .sentiment-live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff4444;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .sentiment-main-score {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .sentiment-main-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .sentiment-main-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--pink), #ffa500, var(--cyan));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .sentiment-main-percent {
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--cyan);
+        }
+
+        .sentiment-main-tag {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--cyan);
+        }
+
+        .sentiment-main-tag.bearish {
+            background: rgba(255, 20, 147, 0.2);
+            color: var(--pink);
+        }
+
+        .sentiment-main-tag.neutral {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+        }
+
+        .sentiment-sources {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sentiment-source {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .sentiment-source:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .source-name {
+            flex: 1;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .source-value {
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+            margin-right: 8px;
+        }
+
+        .source-trend {
+            font-size: 14px;
+        }
+
+        .sentiment-footer {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--glass-border);
+            font-size: 10px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .sentiment-indicator {
+            position: relative;
+            cursor: pointer;
+        }
+
         /* Theme Toggle */
         .theme-toggle {
             width: 40px;
@@ -2368,6 +2624,9 @@
             nav {
                 display: none;
             }
+            .sentiment-indicator {
+                display: none;
+            }
             .chart-stats {
                 display: none;
             }
@@ -2564,6 +2823,65 @@
             <a href="#">Earn</a>
             <a href="#">Copy Trading</a>
         </nav>
+        
+        <!-- Social Sentiment Indicator -->
+        <div class="sentiment-indicator" id="sentimentIndicator" onclick="toggleSentimentDropdown()">
+            <div class="sentiment-icon" id="sentimentIcon">📈</div>
+            <div class="sentiment-info">
+                <span class="sentiment-label"><span id="sentimentSymbol">BTC</span> SENTIMENT</span>
+                <span class="sentiment-value">
+                    <span class="sentiment-bar">
+                        <span class="sentiment-fill bullish" id="sentimentFill" style="width: 78%;"></span>
+                    </span>
+                    <span class="sentiment-percent" id="sentimentPercent">78%</span>
+                    <span class="sentiment-tag bullish" id="sentimentTag">Bullish</span>
+                </span>
+            </div>
+            <svg class="sentiment-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            
+            <!-- Sentiment Dropdown -->
+            <div class="sentiment-dropdown" id="sentimentDropdown">
+                <div class="sentiment-dropdown-header">
+                    <span id="sentimentDropdownSymbol">BTC</span> Social Sentiment
+                    <span class="sentiment-live-dot"></span>
+                </div>
+                <div class="sentiment-main-score">
+                    <div class="sentiment-main-bar">
+                        <div class="sentiment-main-fill" id="sentimentMainFill" style="width: 78%;"></div>
+                    </div>
+                    <span class="sentiment-main-percent" id="sentimentMainPercent">78%</span>
+                    <span class="sentiment-main-tag" id="sentimentMainTag">Bullish</span>
+                </div>
+                <div class="sentiment-sources">
+                    <div class="sentiment-source">
+                        <span class="source-name">Twitter</span>
+                        <span class="source-value" id="sentimentTwitter">82%</span>
+                        <span class="source-trend bullish">📈</span>
+                    </div>
+                    <div class="sentiment-source">
+                        <span class="source-name">Reddit</span>
+                        <span class="source-value" id="sentimentReddit">74%</span>
+                        <span class="source-trend bullish">📈</span>
+                    </div>
+                    <div class="sentiment-source">
+                        <span class="source-name">News</span>
+                        <span class="source-value" id="sentimentNews">71%</span>
+                        <span class="source-trend bullish">📈</span>
+                    </div>
+                    <div class="sentiment-source">
+                        <span class="source-name">Telegram</span>
+                        <span class="source-value" id="sentimentTelegram">79%</span>
+                        <span class="source-trend bullish">📈</span>
+                    </div>
+                </div>
+                <div class="sentiment-footer">
+                    Data simulated • Updates with pair
+                </div>
+            </div>
+        </div>
+        
         <div class="header-actions">
             <button class="sound-toggle" id="soundToggle" onclick="toggleSound()" title="Toggle Sound">
                 <svg id="soundIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -3267,6 +3585,9 @@
             // Update submit button
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.textContent = (tradeType === 'buy' ? 'BUY ' : 'SELL ') + symbol;
+            
+            // Update social sentiment for this pair
+            updateSentiment(symbol);
             
             // Clear trades list for fresh live data
             document.getElementById('tradesList').innerHTML = `
@@ -4028,6 +4349,98 @@
             }
         });
 
+        // ===== SOCIAL SENTIMENT =====
+        // Simulated sentiment data (in production, this would come from LunarCrush or similar API)
+        const sentimentData = {
+            BTC: { score: 78, trend: 'bullish', twitter: 82, reddit: 74, news: 71, telegram: 79 },
+            ETH: { score: 72, trend: 'bullish', twitter: 75, reddit: 68, news: 70, telegram: 74 },
+            SOL: { score: 85, trend: 'bullish', twitter: 89, reddit: 82, news: 80, telegram: 88 },
+            XRP: { score: 45, trend: 'neutral', twitter: 48, reddit: 42, news: 44, telegram: 46 },
+            DOGE: { score: 92, trend: 'bullish', twitter: 95, reddit: 91, news: 85, telegram: 94 },
+            ADA: { score: 38, trend: 'bearish', twitter: 35, reddit: 40, news: 42, telegram: 36 },
+            AVAX: { score: 65, trend: 'bullish', twitter: 68, reddit: 62, news: 64, telegram: 66 },
+            LINK: { score: 71, trend: 'bullish', twitter: 74, reddit: 69, news: 68, telegram: 72 },
+            DOT: { score: 42, trend: 'bearish', twitter: 40, reddit: 44, news: 45, telegram: 39 },
+            MATIC: { score: 58, trend: 'neutral', twitter: 60, reddit: 55, news: 58, telegram: 59 },
+            MX1: { score: 88, trend: 'bullish', twitter: 91, reddit: 85, news: 84, telegram: 90 }
+        };
+
+        function toggleSentimentDropdown() {
+            const indicator = document.getElementById('sentimentIndicator');
+            indicator.classList.toggle('open');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const indicator = document.getElementById('sentimentIndicator');
+            if (indicator && !indicator.contains(e.target)) {
+                indicator.classList.remove('open');
+            }
+        });
+
+        function updateSentiment(symbol) {
+            const data = sentimentData[symbol] || { score: 50, trend: 'neutral', twitter: 50, reddit: 50, news: 50, telegram: 50 };
+            const score = data.score;
+            const trend = data.trend;
+            
+            // Update symbol labels
+            document.getElementById('sentimentSymbol').textContent = symbol;
+            document.getElementById('sentimentDropdownSymbol').textContent = symbol;
+            
+            // Update compact view
+            const fill = document.getElementById('sentimentFill');
+            fill.style.width = score + '%';
+            fill.className = 'sentiment-fill ' + trend;
+            
+            document.getElementById('sentimentPercent').textContent = score + '%';
+            
+            const icon = document.getElementById('sentimentIcon');
+            icon.textContent = trend === 'bullish' ? '📈' : trend === 'bearish' ? '📉' : '➡️';
+            
+            const tag = document.getElementById('sentimentTag');
+            tag.textContent = trend.charAt(0).toUpperCase() + trend.slice(1);
+            tag.className = 'sentiment-tag ' + trend;
+            
+            // Update dropdown view
+            document.getElementById('sentimentMainFill').style.width = score + '%';
+            document.getElementById('sentimentMainPercent').textContent = score + '%';
+            
+            const mainTag = document.getElementById('sentimentMainTag');
+            mainTag.textContent = trend.charAt(0).toUpperCase() + trend.slice(1);
+            mainTag.className = 'sentiment-main-tag ' + trend;
+            
+            // Update sources
+            updateSource('sentimentTwitter', data.twitter, trend);
+            updateSource('sentimentReddit', data.reddit, trend);
+            updateSource('sentimentNews', data.news, trend);
+            updateSource('sentimentTelegram', data.telegram, trend);
+        }
+
+        function updateSource(id, value, trend) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.textContent = value + '%';
+                const trendEl = el.nextElementSibling;
+                if (trendEl) {
+                    if (value >= 60) {
+                        trendEl.textContent = '📈';
+                        trendEl.className = 'source-trend bullish';
+                    } else if (value <= 40) {
+                        trendEl.textContent = '📉';
+                        trendEl.className = 'source-trend bearish';
+                    } else {
+                        trendEl.textContent = '➡️';
+                        trendEl.className = 'source-trend neutral';
+                    }
+                }
+            }
+        }
+
+        function initSentiment() {
+            // Initialize with default symbol (BTC)
+            updateSentiment('BTC');
+        }
+
         // ===== WIDGETS =====
         async function initFearGreed() {
             // Show loading state
@@ -4136,6 +4549,7 @@
             initFearGreed();
             initPortfolio();
             initNews();
+            initSentiment();
             startCountdown();
             
             // Initialize particles
