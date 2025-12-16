@@ -1022,6 +1022,11 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
             position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .ob-row:hover {
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .ob-row .depth-bar {
@@ -1075,6 +1080,11 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
             border-bottom: 1px solid rgba(0, 212, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .trade-row:hover {
+            background: rgba(0, 212, 255, 0.05);
         }
 
         .trade-row.buy .trade-price { color: var(--cyan); }
@@ -1333,7 +1343,20 @@
         }
 
         .submit-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        .submit-btn.buy:hover {
+            box-shadow: 0 15px 40px var(--purple-glow), 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-btn.sell:hover {
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.5), 0 0 30px rgba(255, 20, 147, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0) scale(0.98);
         }
 
         /* ===== WIDGETS SECTION ===== */
@@ -1349,6 +1372,13 @@
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .fear-greed:hover {
+            border-color: var(--purple);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+            transform: translateY(-2px);
         }
 
         .fg-header {
@@ -1402,6 +1432,13 @@
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-widget:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .portfolio-header {
@@ -1469,6 +1506,13 @@
             border: 1px solid var(--glass-border);
             border-radius: 12px;
             padding: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .news-widget:hover {
+            border-color: var(--pink);
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.2);
+            transform: translateY(-2px);
         }
 
         .news-title {
@@ -2067,10 +2111,247 @@
             color: var(--cyan);
         }
 
+        /* ===== EPIC EFFECTS ===== */
+
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.05) 25%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0.05) 75%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .skeleton-text {
+            height: 14px;
+            width: 80px;
+            margin: 4px 0;
+        }
+
+        .skeleton-text.short { width: 50px; }
+        .skeleton-text.long { width: 120px; }
+
+        .skeleton-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .skeleton-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .skeleton-price {
+            height: 20px;
+            width: 100px;
+        }
+
+        /* Smooth Number Animation */
+        .animated-number {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .animated-number.counting-up {
+            color: var(--cyan);
+        }
+
+        .animated-number.counting-down {
+            color: var(--pink);
+        }
+
+        /* Sound Toggle Button */
+        .sound-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--cyan);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .sound-toggle:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: var(--cyan);
+        }
+
+        .sound-toggle.muted {
+            color: var(--text-muted);
+            border-color: var(--text-muted);
+        }
+
+        .sound-toggle.muted:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Price Flash Animation */
+        .price-flash {
+            animation: priceFlash 0.5s ease;
+        }
+
+        .price-flash.up {
+            animation: priceFlashUp 0.5s ease;
+        }
+
+        .price-flash.down {
+            animation: priceFlashDown 0.5s ease;
+        }
+
+        @keyframes priceFlashUp {
+            0% { color: var(--cyan); text-shadow: 0 0 20px var(--cyan); transform: scale(1.1); }
+            100% { color: var(--cyan); text-shadow: none; transform: scale(1); }
+        }
+
+        @keyframes priceFlashDown {
+            0% { color: var(--pink); text-shadow: 0 0 20px var(--pink); transform: scale(1.1); }
+            100% { color: var(--pink); text-shadow: none; transform: scale(1); }
+        }
+
+        /* Particle Canvas */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 99999;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotateZ(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotateZ(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Button Ripple Effect */
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: rippleEffect 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Glowing Border Animation */
+        .glow-border {
+            position: relative;
+        }
+
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--cyan), var(--purple), var(--pink), var(--cyan));
+            background-size: 400% 400%;
+            border-radius: inherit;
+            z-index: -1;
+            animation: glowRotate 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .glow-border:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes glowRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Number Roll Animation */
+        .number-roll {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .number-roll.changing {
+            animation: numberRoll 0.3s ease;
+        }
+
+        @keyframes numberRoll {
+            0% { transform: translateY(-10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Hover Tilt Effect */
+        .tilt-card {
+            transition: transform 0.2s ease;
+            transform-style: preserve-3d;
+        }
+
+        .tilt-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+        }
+
+        /* Pulse Glow on Success */
+        .success-pulse {
+            animation: successPulse 0.5s ease;
+        }
+
+        @keyframes successPulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(0, 212, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1200px) {
             .right-sidebar {
                 width: 320px;
+            }
+            .header-stat {
+                padding: 0 8px;
             }
         }
 
@@ -2080,7 +2361,9 @@
             }
             .right-sidebar {
                 width: 100%;
-                max-height: 50vh;
+                max-height: none;
+                border-left: none;
+                border-top: 1px solid var(--glass-border);
             }
             nav {
                 display: none;
@@ -2096,6 +2379,29 @@
                 left: -16px;
                 border-radius: 0 0 12px 12px;
             }
+            .tradingview-widget {
+                height: 400px;
+            }
+            .depth-chart-container {
+                height: 80px;
+            }
+            .positions-panel {
+                min-height: 100px;
+            }
+            .header-stats-scroll {
+                max-width: calc(100vw - 250px);
+            }
+            .widgets-section {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .fear-greed, .portfolio-widget, .news-widget {
+                margin-bottom: 0;
+            }
+            .news-widget {
+                grid-column: span 2;
+            }
         }
 
         @media (max-width: 600px) {
@@ -2104,6 +2410,7 @@
             }
             header {
                 padding: 0 12px;
+                height: 56px;
             }
             .logo-text {
                 display: none;
@@ -2112,8 +2419,115 @@
                 display: none;
             }
             .ai-chat-window {
-                width: 300px;
+                width: calc(100vw - 40px);
+                right: -10px;
             }
+            .chart-header-bar {
+                padding: 8px 12px;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .pair-selector-btn h2 {
+                font-size: 16px;
+            }
+            .current-price {
+                font-size: 16px;
+            }
+            .header-stat {
+                padding: 0 6px;
+            }
+            .header-stat-label {
+                font-size: 9px;
+            }
+            .header-stat-value {
+                font-size: 11px;
+            }
+            .live-badge {
+                padding: 3px 8px;
+                font-size: 10px;
+            }
+            .header-divider {
+                display: none;
+            }
+            .tradingview-widget {
+                height: 300px;
+            }
+            .trade-section {
+                padding: 12px;
+            }
+            .leverage-section {
+                margin-bottom: 12px;
+            }
+            .widgets-section {
+                grid-template-columns: 1fr;
+                padding: 12px;
+            }
+            .news-widget {
+                grid-column: span 1;
+            }
+            .ob-content {
+                padding: 8px;
+            }
+            .ob-row {
+                font-size: 11px;
+            }
+            .market-dropdown {
+                left: -12px;
+            }
+            .modal {
+                width: 95%;
+                padding: 16px;
+            }
+            .toast-container {
+                right: 12px;
+                left: 12px;
+            }
+            .toast {
+                min-width: auto;
+            }
+            .ai-chat-bubble {
+                bottom: 70px;
+                right: 12px;
+            }
+            .ai-chat-btn {
+                width: 50px;
+                height: 50px;
+            }
+            .footer-brand {
+                font-size: 9px;
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .header-actions {
+                gap: 6px;
+            }
+            .sound-toggle, .theme-toggle {
+                width: 36px;
+                height: 36px;
+            }
+            .user-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 12px;
+            }
+            .pair-selector-btn {
+                padding: 4px 8px;
+            }
+            .pair-icon {
+                width: 24px;
+                height: 24px;
+                font-size: 8px;
+            }
+            .pair-selector-btn h2 {
+                font-size: 14px;
+            }
+            .submit-btn {
+                padding: 12px;
+                font-size: 13px;
+            }
+        }
             .pair-selector-btn h2 {
                 font-size: 16px;
             }
@@ -2128,6 +2542,7 @@
     <div class="bg-image"></div>
     <div class="bg-grid"></div>
     <div class="bg-glow"></div>
+    <canvas id="particleCanvas"></canvas>
 
     <!-- Scrolling Ticker -->
     <div class="ticker-wrap">
@@ -2150,6 +2565,13 @@
             <a href="#">Copy Trading</a>
         </nav>
         <div class="header-actions">
+            <button class="sound-toggle" id="soundToggle" onclick="toggleSound()" title="Toggle Sound">
+                <svg id="soundIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                </svg>
+            </button>
             <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
                 <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="5"></circle>
@@ -2675,6 +3097,7 @@
         let tradeType = 'buy';
         let leverage = 10;
         let isDarkTheme = true;
+        let soundEnabled = true;
 
         // ===== TICKER =====
         const tickerData = [
@@ -3019,6 +3442,11 @@
                 <span>0x7a3...4f2</span>
             `;
             playSound();
+            
+            // Success pulse on wallet button
+            const btn = document.getElementById('walletBtn');
+            btn.classList.add('success-pulse');
+            setTimeout(() => btn.classList.remove('success-pulse'), 500);
         }
 
         function openConfirmModal() {
@@ -3041,7 +3469,13 @@
         function executeOrder() {
             closeConfirmModal();
             playSound();
+            triggerConfetti(); // 🎉 Epic confetti!
             showToast('success', 'Order Executed', `${tradeType.toUpperCase()} order placed successfully!`);
+            
+            // Add success pulse to submit button
+            const btn = document.getElementById('submitBtn');
+            btn.classList.add('success-pulse');
+            setTimeout(() => btn.classList.remove('success-pulse'), 500);
         }
 
         function openAlertModal() {
@@ -3116,11 +3550,36 @@
 
         // ===== SOUND EFFECTS =====
         function playSound() {
+            if (!soundEnabled) return;
             try {
                 const audio = document.getElementById('successSound');
                 audio.currentTime = 0;
                 audio.play();
             } catch (e) {}
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('soundToggle');
+            const icon = document.getElementById('soundIcon');
+            
+            if (soundEnabled) {
+                btn.classList.remove('muted');
+                icon.innerHTML = `
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                `;
+                showToast('success', 'Sound On', 'Sound effects enabled');
+            } else {
+                btn.classList.add('muted');
+                icon.innerHTML = `
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                `;
+                showToast('success', 'Sound Off', 'Sound effects muted');
+            }
         }
 
         // ===== KEYBOARD SHORTCUTS =====
@@ -3216,31 +3675,291 @@
             initPortfolio();
             initNews();
             startCountdown();
+            
+            // Initialize particles
+            initParticles();
+            
+            // Add ripple effect to buttons
+            initRippleEffects();
 
             // Update order book periodically
             setInterval(renderOrderBook, 3000);
             setInterval(() => {
-                // Add new trade
+                // Add new trade with slide animation
                 const list = document.getElementById('tradesList');
+                if (!list) return;
+                
                 const isBuy = Math.random() > 0.5;
                 const row = document.createElement('div');
                 row.className = `trade-row ${isBuy ? 'buy' : 'sell'}`;
+                row.style.opacity = '0';
+                row.style.transform = 'translateX(-10px)';
                 row.innerHTML = `
                     <span class="trade-price">${(2.38 + (Math.random() - 0.5) * 0.02).toFixed(4)}</span>
                     <span class="trade-amount">${(Math.random() * 1000 + 100).toFixed(2)}</span>
                     <span class="trade-time">${new Date().toLocaleTimeString()}</span>
                 `;
                 list.insertBefore(row, list.firstChild);
+                
+                // Animate in
+                requestAnimationFrame(() => {
+                    row.style.transition = 'all 0.3s ease';
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateX(0)';
+                });
+                
                 if (list.children.length > 20) list.lastChild.remove();
             }, 2000);
 
-            // Update price periodically
+            // Update price periodically with smooth animation
             setInterval(() => {
                 const priceEl = document.getElementById('currentPrice');
-                const basePrice = parseFloat(priceEl.textContent.replace(/,/g, ''));
-                const newPrice = basePrice + (Math.random() - 0.5) * 0.01;
-                priceEl.textContent = newPrice.toFixed(4);
-            }, 1500);
+                if (!priceEl) return;
+                
+                const oldPrice = parseFloat(priceEl.textContent.replace(/,/g, ''));
+                const newPrice = oldPrice + (Math.random() - 0.5) * 0.01;
+                
+                // Add flash animation
+                priceEl.classList.remove('price-flash', 'up', 'down');
+                void priceEl.offsetWidth; // Trigger reflow
+                priceEl.classList.add('price-flash', newPrice > oldPrice ? 'up' : 'down');
+                
+                // Use smooth number animation
+                animateNumber(priceEl, newPrice, 400);
+            }, 2500);
+        }
+
+        // ===== EPIC PARTICLE SYSTEM =====
+        function initParticles() {
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = 50;
+            
+            // Particle class
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                    this.color = Math.random() > 0.5 ? '0, 212, 255' : '138, 43, 226';
+                }
+                
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                }
+                
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+                    ctx.fill();
+                    
+                    // Glow effect
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = `rgba(${this.color}, 0.5)`;
+                }
+            }
+            
+            // Create particles
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+            
+            // Animation loop
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw connections
+                particles.forEach((p1, i) => {
+                    particles.slice(i + 1).forEach(p2 => {
+                        const dx = p1.x - p2.x;
+                        const dy = p1.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < 150) {
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(0, 212, 255, ${0.1 * (1 - dist / 150)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                // Update and draw particles
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            // Resize handler
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        // ===== CONFETTI EXPLOSION =====
+        function triggerConfetti() {
+            const colors = ['#00d4ff', '#8a2be2', '#ff1493', '#ffd700', '#00ff88'];
+            const confettiCount = 100;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                
+                // Random shapes
+                if (Math.random() > 0.5) {
+                    confetti.style.borderRadius = '50%';
+                } else {
+                    confetti.style.width = '8px';
+                    confetti.style.height = '16px';
+                }
+                
+                document.body.appendChild(confetti);
+                
+                // Remove after animation
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        // ===== RIPPLE EFFECT =====
+        function initRippleEffects() {
+            const buttons = document.querySelectorAll('.submit-btn, .wallet-btn, .alert-btn, .trade-tab, .percent-btn');
+            
+            buttons.forEach(btn => {
+                btn.classList.add('ripple-btn');
+                btn.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    ripple.className = 'ripple';
+                    
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+                    ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        }
+
+        // ===== SMOOTH NUMBER COUNTING =====
+        function animateNumber(element, newValue, duration = 500) {
+            const startValue = parseFloat(element.textContent.replace(/[^0-9.-]/g, '')) || 0;
+            const startTime = performance.now();
+            const isUp = newValue > startValue;
+            
+            element.classList.remove('counting-up', 'counting-down');
+            element.classList.add(isUp ? 'counting-up' : 'counting-down');
+            
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const currentValue = startValue + (newValue - startValue) * easeOut;
+                
+                // Format based on value size
+                if (newValue > 1000) {
+                    element.textContent = currentValue.toLocaleString(undefined, {maximumFractionDigits: 2});
+                } else {
+                    element.textContent = currentValue.toFixed(4);
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    setTimeout(() => {
+                        element.classList.remove('counting-up', 'counting-down');
+                    }, 300);
+                }
+            }
+            
+            requestAnimationFrame(update);
+        }
+
+        // ===== LOADING SKELETON =====
+        function showLoadingSkeleton() {
+            // Market dropdown skeleton
+            const dropdownList = document.getElementById('pairDropdownList');
+            if (dropdownList) {
+                dropdownList.innerHTML = Array(8).fill().map(() => `
+                    <div class="skeleton-row">
+                        <div class="skeleton skeleton-circle"></div>
+                        <div style="flex:1">
+                            <div class="skeleton skeleton-text long"></div>
+                            <div class="skeleton skeleton-text short"></div>
+                        </div>
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text short"></div>
+                    </div>
+                `).join('');
+            }
+            
+            // Order book skeleton
+            const asksList = document.getElementById('asksList');
+            const bidsList = document.getElementById('bidsList');
+            if (asksList && bidsList) {
+                const skeletonRows = Array(5).fill().map(() => `
+                    <div class="skeleton-row" style="padding: 4px 0;">
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text short"></div>
+                    </div>
+                `).join('');
+                asksList.innerHTML = skeletonRows;
+                bidsList.innerHTML = skeletonRows;
+            }
+            
+            // Trades skeleton
+            const tradesList = document.getElementById('tradesList');
+            if (tradesList) {
+                tradesList.innerHTML = Array(10).fill().map(() => `
+                    <div class="skeleton-row" style="padding: 6px 0;">
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text short"></div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function hideLoadingSkeleton() {
+            isLoading = false;
+            // Data will be loaded by normal init functions
         }
 
         // Funding countdown timer
