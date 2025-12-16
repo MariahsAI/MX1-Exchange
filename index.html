@@ -2930,7 +2930,7 @@
                     "symbol": "BINANCE:BTCUSDT",
                     "interval": "15",
                     "timezone": "Etc/UTC",
-                    "theme": isDarkTheme ? "dark" : "light",
+                    "theme": "dark",
                     "style": "1",
                     "locale": "en",
                     "toolbar_bg": "#0f0f1e",
@@ -2938,7 +2938,26 @@
                     "hide_side_toolbar": false,
                     "allow_symbol_change": true,
                     "container_id": "tradingview_chart",
-                    "hide_volume": false
+                    "hide_volume": false,
+                    "backgroundColor": "#0f0f1e",
+                    "gridColor": "rgba(0, 212, 255, 0.1)",
+                    "overrides": {
+                        "paneProperties.background": "#0f0f1e",
+                        "paneProperties.backgroundType": "solid",
+                        "paneProperties.vertGridProperties.color": "rgba(0, 212, 255, 0.1)",
+                        "paneProperties.horzGridProperties.color": "rgba(0, 212, 255, 0.1)",
+                        "mainSeriesProperties.candleStyle.upColor": "#00d4ff",
+                        "mainSeriesProperties.candleStyle.downColor": "#ff1493",
+                        "mainSeriesProperties.candleStyle.borderUpColor": "#00d4ff",
+                        "mainSeriesProperties.candleStyle.borderDownColor": "#ff1493",
+                        "mainSeriesProperties.candleStyle.wickUpColor": "#00d4ff",
+                        "mainSeriesProperties.candleStyle.wickDownColor": "#ff1493",
+                        "volumePaneSize": "small"
+                    },
+                    "studies_overrides": {
+                        "volume.volume.color.0": "#ff1493",
+                        "volume.volume.color.1": "#00d4ff"
+                    }
                 });
             }
         }
