@@ -6802,12 +6802,18 @@
         function toggleTradeForm() {
             const content = document.getElementById('tradeFormContent');
             const toggle = document.getElementById('tradeFormToggle');
+            const newsWidget = document.querySelector('.widgets-section .news-widget');
+            
             if (content.classList.contains('expanded')) {
                 content.classList.remove('expanded');
                 toggle.classList.remove('open');
+                // Show news when trade form closes
+                if (newsWidget) newsWidget.style.display = 'block';
             } else {
                 content.classList.add('expanded');
                 toggle.classList.add('open');
+                // Hide news when trade form opens
+                if (newsWidget) newsWidget.style.display = 'none';
             }
         }
 
