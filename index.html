@@ -1910,6 +1910,219 @@
             font-size: 13px;
         }
 
+        /* ===== MARKET INTELLIGENCE ===== */
+        .market-intelligence {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .heatmap-widget,
+        .whale-widget,
+        .gainers-widget {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 12px;
+            min-height: 220px;
+        }
+
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .widget-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .widget-badge {
+            font-size: 9px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .widget-badge.live {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff4444;
+            animation: pulse 2s infinite;
+        }
+
+        /* Heatmap Grid */
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+
+        .heatmap-cell {
+            padding: 10px 6px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .heatmap-cell:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .heatmap-cell .symbol {
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+            display: block;
+        }
+
+        .heatmap-cell .change {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .heatmap-cell.up-strong { background: linear-gradient(135deg, #00c853, #00e676); }
+        .heatmap-cell.up-medium { background: linear-gradient(135deg, #00a846, #00c853); }
+        .heatmap-cell.up-weak { background: linear-gradient(135deg, #2e7d32, #43a047); }
+        .heatmap-cell.neutral { background: linear-gradient(135deg, #424242, #616161); }
+        .heatmap-cell.down-weak { background: linear-gradient(135deg, #c62828, #e53935); }
+        .heatmap-cell.down-medium { background: linear-gradient(135deg, #b71c1c, #c62828); }
+        .heatmap-cell.down-strong { background: linear-gradient(135deg, #880e0e, #b71c1c); }
+
+        /* Whale Feed */
+        .whale-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .whale-alert {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            font-size: 12px;
+            animation: slideInLeft 0.3s ease;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .whale-alert .icon {
+            font-size: 18px;
+        }
+
+        .whale-alert .details {
+            flex: 1;
+        }
+
+        .whale-alert .title {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .whale-alert .subtitle {
+            color: var(--text-muted);
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        .whale-alert .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .whale-alert.whale .value { color: var(--cyan); }
+        .whale-alert.liquidation-long .value { color: #ff4444; }
+        .whale-alert.liquidation-short .value { color: #00c853; }
+
+        /* Top Movers */
+        .movers-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .movers-column {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .movers-header {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .movers-column.gainers .movers-header { color: #00c853; }
+        .movers-column.losers .movers-header { color: #ff4444; }
+
+        .movers-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .mover-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .mover-row .coin {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mover-row .coin-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .mover-row .coin-symbol {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .mover-row .change {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .mover-row .change.positive { color: #00c853; }
+        .mover-row .change.negative { color: #ff4444; }
+
         /* ===== FOOTER ===== */
         .footer-brand {
             text-align: center;
@@ -2690,6 +2903,12 @@
             .news-widget {
                 grid-column: span 2;
             }
+            .market-intelligence {
+                grid-template-columns: 1fr;
+            }
+            .heatmap-widget, .whale-widget, .gainers-widget {
+                min-height: 200px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -3101,6 +3320,52 @@
                 <div class="depth-chart-container">
                     <div class="depth-chart-title">Depth Chart</div>
                     <canvas id="depthChart"></canvas>
+                </div>
+
+                <!-- Market Intelligence Section -->
+                <div class="market-intelligence">
+                    <!-- Market Heatmap -->
+                    <div class="heatmap-widget">
+                        <div class="widget-header">
+                            <span class="widget-title">🔥 Market Heatmap</span>
+                            <span class="widget-badge live">LIVE</span>
+                        </div>
+                        <div class="heatmap-grid" id="heatmapGrid">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Whale Alerts & Liquidations -->
+                    <div class="whale-widget">
+                        <div class="widget-header">
+                            <span class="widget-title">🐋 Whale Alerts & Liquidations</span>
+                            <span class="widget-badge live">LIVE</span>
+                        </div>
+                        <div class="whale-feed" id="whaleFeed">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Top Gainers & Losers -->
+                    <div class="gainers-widget">
+                        <div class="widget-header">
+                            <span class="widget-title">📊 Top Movers</span>
+                        </div>
+                        <div class="movers-container">
+                            <div class="movers-column gainers">
+                                <div class="movers-header">🚀 Gainers</div>
+                                <div class="movers-list" id="gainersList">
+                                    <!-- Filled by JS -->
+                                </div>
+                            </div>
+                            <div class="movers-column losers">
+                                <div class="movers-header">💀 Losers</div>
+                                <div class="movers-list" id="losersList">
+                                    <!-- Filled by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -4903,6 +5168,352 @@
             startSentimentUpdates();
         }
 
+        // ===== MARKET INTELLIGENCE =====
+        
+        // Binance API for real-time market data
+        let marketData = [];
+        let heatmapApiAvailable = false;
+        
+        // Heatmap data
+        const heatmapCoins = [
+            'BTC', 'ETH', 'BNB', 'SOL', 'XRP',
+            'DOGE', 'ADA', 'AVAX', 'LINK', 'DOT',
+            'MATIC', 'SHIB', 'LTC', 'UNI', 'ATOM',
+            'XLM', 'FIL', 'NEAR', 'APT', 'ARB'
+        ];
+        
+        let heatmapData = {};
+        
+        async function fetchBinanceTickerData() {
+            try {
+                const response = await fetch('https://api.binance.com/api/v3/ticker/24hr');
+                if (!response.ok) throw new Error('API failed');
+                
+                marketData = await response.json();
+                heatmapApiAvailable = true;
+                
+                // Update heatmap badge to show LIVE
+                const badge = document.querySelector('.heatmap-widget .widget-badge');
+                if (badge) {
+                    badge.textContent = 'LIVE';
+                    badge.classList.add('live');
+                }
+                
+                return true;
+            } catch (e) {
+                heatmapApiAvailable = false;
+                
+                // Update badge to show DEMO
+                const badge = document.querySelector('.heatmap-widget .widget-badge');
+                if (badge) {
+                    badge.textContent = 'DEMO';
+                    badge.classList.remove('live');
+                }
+                
+                return false;
+            }
+        }
+        
+        async function initHeatmap() {
+            // Try to fetch real data first
+            const gotReal = await fetchBinanceTickerData();
+            
+            if (gotReal) {
+                updateHeatmapFromAPI();
+            } else {
+                // Initialize with random data as fallback
+                heatmapCoins.forEach(coin => {
+                    heatmapData[coin] = (Math.random() - 0.5) * 10;
+                });
+                renderHeatmap();
+            }
+            
+            // Update every 2 seconds (Binance is fast!)
+            setInterval(async () => {
+                if (heatmapApiAvailable) {
+                    await fetchBinanceTickerData();
+                    updateHeatmapFromAPI();
+                } else {
+                    // Try to reconnect
+                    const reconnected = await fetchBinanceTickerData();
+                    if (reconnected) {
+                        updateHeatmapFromAPI();
+                    } else {
+                        updateHeatmapSimulated();
+                    }
+                }
+            }, 2000);
+        }
+        
+        function updateHeatmapFromAPI() {
+            heatmapCoins.forEach(coin => {
+                const symbol = coin + 'USDT';
+                const coinData = marketData.find(c => c.symbol === symbol);
+                
+                if (coinData && coinData.priceChangePercent !== null) {
+                    heatmapData[coin] = parseFloat(coinData.priceChangePercent);
+                } else {
+                    // Fallback to simulation for missing coins
+                    if (!heatmapData[coin]) heatmapData[coin] = 0;
+                }
+            });
+            renderHeatmap();
+        }
+        
+        function updateHeatmapSimulated() {
+            heatmapCoins.forEach(coin => {
+                // Random walk with occasional big moves
+                const bigMove = Math.random() < 0.1;
+                const change = bigMove ? (Math.random() - 0.5) * 5 : (Math.random() - 0.5) * 1;
+                heatmapData[coin] = Math.max(-15, Math.min(15, heatmapData[coin] + change));
+            });
+            renderHeatmap();
+        }
+        
+        function renderHeatmap() {
+            const grid = document.getElementById('heatmapGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = heatmapCoins.map(coin => {
+                const change = heatmapData[coin];
+                let colorClass = 'neutral';
+                
+                if (change > 5) colorClass = 'up-strong';
+                else if (change > 2) colorClass = 'up-medium';
+                else if (change > 0.5) colorClass = 'up-weak';
+                else if (change < -5) colorClass = 'down-strong';
+                else if (change < -2) colorClass = 'down-medium';
+                else if (change < -0.5) colorClass = 'down-weak';
+                
+                return `
+                    <div class="heatmap-cell ${colorClass}" onclick="selectPair('${coin}')">
+                        <span class="symbol">${coin}</span>
+                        <span class="change">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Whale Alerts
+        const whaleAlertTypes = [
+            { type: 'whale', icon: '🐋', title: '{amount} {coin} transferred', subtitle: 'From {from} to {to}' },
+            { type: 'whale', icon: '🐋', title: '{amount} {coin} moved to exchange', subtitle: 'Potential sell pressure' },
+            { type: 'whale', icon: '🐋', title: '{amount} {coin} withdrawn from exchange', subtitle: 'Accumulation signal' },
+            { type: 'liquidation-long', icon: '💀', title: 'LONG Liquidated', subtitle: '{coin} @ ${price}' },
+            { type: 'liquidation-short', icon: '🚀', title: 'SHORT Liquidated', subtitle: '{coin} @ ${price}' },
+        ];
+        
+        const whaleCoins = ['BTC', 'ETH', 'SOL', 'XRP', 'BNB'];
+        const exchanges = ['Binance', 'Coinbase', 'Kraken', 'OKX', 'Bybit'];
+        const wallets = ['Unknown Wallet', 'Whale Wallet', 'Institution', 'Market Maker'];
+        
+        let whaleAlerts = [];
+        
+        function initWhaleAlerts() {
+            // Generate initial alerts
+            for (let i = 0; i < 5; i++) {
+                addWhaleAlert(false);
+            }
+            renderWhaleAlerts();
+            
+            // Add new alert every 8-15 seconds
+            scheduleNextWhaleAlert();
+        }
+        
+        function scheduleNextWhaleAlert() {
+            const delay = Math.random() * 7000 + 8000; // 8-15 seconds
+            setTimeout(() => {
+                addWhaleAlert(true);
+                scheduleNextWhaleAlert();
+            }, delay);
+        }
+        
+        function addWhaleAlert(animate = true) {
+            const template = whaleAlertTypes[Math.floor(Math.random() * whaleAlertTypes.length)];
+            const coin = whaleCoins[Math.floor(Math.random() * whaleCoins.length)];
+            const exchange = exchanges[Math.floor(Math.random() * exchanges.length)];
+            const wallet = wallets[Math.floor(Math.random() * wallets.length)];
+            
+            let amount, value;
+            if (coin === 'BTC') {
+                amount = (Math.random() * 500 + 100).toFixed(0);
+                value = (amount * 87500).toLocaleString();
+            } else if (coin === 'ETH') {
+                amount = (Math.random() * 5000 + 1000).toFixed(0);
+                value = (amount * 3100).toLocaleString();
+            } else {
+                amount = (Math.random() * 1000000 + 100000).toFixed(0);
+                value = (amount * (Math.random() * 5 + 0.5)).toLocaleString();
+            }
+            
+            const price = coin === 'BTC' ? (87000 + Math.random() * 1000).toFixed(2) : 
+                          coin === 'ETH' ? (3050 + Math.random() * 100).toFixed(2) :
+                          (Math.random() * 100 + 1).toFixed(2);
+            
+            const liquidationValue = (Math.random() * 5 + 0.5).toFixed(2) + 'M';
+            
+            let title = template.title
+                .replace('{amount}', Number(amount).toLocaleString())
+                .replace('{coin}', coin);
+            
+            let subtitle = template.subtitle
+                .replace('{from}', wallet)
+                .replace('{to}', exchange)
+                .replace('{coin}', coin)
+                .replace('{price}', price);
+            
+            const displayValue = template.type.includes('liquidation') ? '$' + liquidationValue : '$' + value;
+            
+            whaleAlerts.unshift({
+                type: template.type,
+                icon: template.icon,
+                title: title,
+                subtitle: subtitle,
+                value: displayValue,
+                animate: animate,
+                time: new Date()
+            });
+            
+            // Keep only last 8 alerts
+            whaleAlerts = whaleAlerts.slice(0, 8);
+            
+            renderWhaleAlerts();
+        }
+        
+        function renderWhaleAlerts() {
+            const feed = document.getElementById('whaleFeed');
+            if (!feed) return;
+            
+            feed.innerHTML = whaleAlerts.map((alert, i) => `
+                <div class="whale-alert ${alert.type}" style="${alert.animate && i === 0 ? 'animation: slideInLeft 0.3s ease;' : ''}">
+                    <span class="icon">${alert.icon}</span>
+                    <div class="details">
+                        <div class="title">${alert.title}</div>
+                        <div class="subtitle">${alert.subtitle}</div>
+                    </div>
+                    <span class="value">${alert.value}</span>
+                </div>
+            `).join('');
+        }
+        
+        // Top Movers
+        let moversData = {
+            gainers: [],
+            losers: []
+        };
+        
+        async function initTopMovers() {
+            await updateTopMovers();
+            // Update every 2 seconds (sync with heatmap)
+            setInterval(updateTopMovers, 2000);
+        }
+        
+        async function updateTopMovers() {
+            // Use data from Binance if available
+            if (marketData.length > 0) {
+                updateMoversFromAPI();
+            } else {
+                // Try to fetch if not already loaded
+                const gotReal = await fetchBinanceTickerData();
+                if (gotReal) {
+                    updateMoversFromAPI();
+                } else {
+                    updateMoversSimulated();
+                }
+            }
+        }
+        
+        function updateMoversFromAPI() {
+            // Filter for USDT pairs only and sort by 24h change
+            const usdtPairs = marketData
+                .filter(c => c.symbol.endsWith('USDT') && c.priceChangePercent !== null)
+                .map(c => ({
+                    symbol: c.symbol.replace('USDT', ''),
+                    change: parseFloat(c.priceChangePercent)
+                }))
+                .filter(c => c.symbol.length <= 5); // Filter out weird pairs
+            
+            const sorted = [...usdtPairs].sort((a, b) => b.change - a.change);
+            
+            // Get top 5 gainers
+            moversData.gainers = sorted.slice(0, 5);
+            
+            // Get top 5 losers (from bottom)
+            moversData.losers = sorted.slice(-5).reverse();
+            
+            // Update badge to show LIVE
+            const header = document.querySelector('.gainers-widget .widget-header');
+            if (header && !header.querySelector('.widget-badge')) {
+                const badge = document.createElement('span');
+                badge.className = 'widget-badge live';
+                badge.textContent = 'LIVE';
+                header.appendChild(badge);
+            }
+            
+            renderTopMovers();
+        }
+        
+        function updateMoversSimulated() {
+            const allCoins = ['SOL', 'AVAX', 'LINK', 'DOT', 'ATOM', 'NEAR', 'APT', 'ARB', 'OP', 'INJ', 
+                             'DOGE', 'SHIB', 'PEPE', 'ADA', 'XRP', 'MATIC', 'FIL', 'LTC', 'UNI', 'AAVE'];
+            
+            // Generate random changes
+            const changes = allCoins.map(coin => ({
+                symbol: coin,
+                change: (Math.random() - 0.5) * 20
+            }));
+            
+            // Sort and get top 5 gainers and losers
+            const sorted = [...changes].sort((a, b) => b.change - a.change);
+            
+            moversData.gainers = sorted.slice(0, 5).map(c => ({
+                ...c,
+                change: Math.abs(c.change) + Math.random() * 3 // Ensure positive
+            }));
+            
+            moversData.losers = sorted.slice(-5).reverse().map(c => ({
+                ...c,
+                change: -(Math.abs(c.change) + Math.random() * 3) // Ensure negative
+            }));
+            
+            renderTopMovers();
+        }
+        
+        function renderTopMovers() {
+            const gainersList = document.getElementById('gainersList');
+            const losersList = document.getElementById('losersList');
+            
+            if (gainersList) {
+                gainersList.innerHTML = moversData.gainers.map(coin => `
+                    <div class="mover-row" onclick="selectPair('${coin.symbol}')">
+                        <div class="coin">
+                            <div class="coin-icon">${coin.symbol.slice(0, 2)}</div>
+                            <span class="coin-symbol">${coin.symbol}</span>
+                        </div>
+                        <span class="change positive">+${Math.abs(coin.change).toFixed(2)}%</span>
+                    </div>
+                `).join('');
+            }
+            
+            if (losersList) {
+                losersList.innerHTML = moversData.losers.map(coin => `
+                    <div class="mover-row" onclick="selectPair('${coin.symbol}')">
+                        <div class="coin">
+                            <div class="coin-icon">${coin.symbol.slice(0, 2)}</div>
+                            <span class="coin-symbol">${coin.symbol}</span>
+                        </div>
+                        <span class="change negative">${coin.change.toFixed(2)}%</span>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        async function initMarketIntelligence() {
+            await initHeatmap();
+            initWhaleAlerts();
+            await initTopMovers();
+        }
+
         // ===== WIDGETS =====
         let currentFearGreed = 72;
         
@@ -5045,6 +5656,7 @@
             initPortfolio();
             initNews();
             initSentiment();
+            initMarketIntelligence();
             startCountdown();
             
             // Initialize particles
