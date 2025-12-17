@@ -1352,6 +1352,40 @@
             color: var(--text-muted);
         }
 
+        /* Buy/Sell Ratio Bar */
+        .ob-ratio-bar {
+            display: flex;
+            height: 24px;
+            margin-top: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .ob-ratio-buy {
+            background: rgba(0, 212, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8px;
+            color: var(--cyan);
+            transition: width 0.5s ease;
+            width: 50%;
+        }
+
+        .ob-ratio-sell {
+            background: rgba(255, 20, 147, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8px;
+            color: var(--pink);
+            transition: width 0.5s ease;
+            width: 50%;
+        }
+
         /* Recent Trades */
         .trades-list {
             max-height: 200px;
@@ -1379,8 +1413,47 @@
 
         /* ===== TRADE FORM ===== */
         .trade-section {
-            padding: 16px;
+            padding: 12px;
+        }
+
+        /* Place Trades Dropdown */
+        .place-trades-section {
             border-bottom: 1px solid var(--glass-border);
+        }
+
+        .place-trades-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(138, 43, 226, 0.1));
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+
+        .place-trades-header:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(138, 43, 226, 0.15));
+        }
+
+        .place-trades-toggle {
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        .place-trades-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .trade-form-content {
+            display: none;
+            padding: 12px;
+        }
+
+        .trade-form-content.expanded {
+            display: block;
         }
 
         .trade-tabs {
@@ -1643,6 +1716,458 @@
         .submit-btn:active {
             transform: translateY(0) scale(0.98);
         }
+
+        /* ===== BITUNIX STYLE TRADE FORM ===== */
+        .trade-top-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .margin-select {
+            flex: 1;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .leverage-btn {
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .leverage-btn span {
+            color: #ff4444;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .leverage-btn:hover {
+            border-color: #ff4444;
+        }
+
+        .oc-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 3px;
+            margin-bottom: 12px;
+        }
+
+        .oc-tab {
+            flex: 1;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .oc-tab.active {
+            background: var(--cyan);
+            color: #000;
+        }
+
+        .order-types-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .ot-btn {
+            padding: 6px 0;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .ot-btn.active {
+            color: var(--text-primary);
+        }
+
+        .ot-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--cyan);
+        }
+
+        .avail-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+        }
+
+        .avail-row span:last-child {
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .input-row {
+            margin-bottom: 10px;
+        }
+
+        .input-row label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .input-box input {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .input-box .last-btn {
+            padding: 4px 10px;
+            background: transparent;
+            border: none;
+            color: #ff4444;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .input-box .currency {
+            color: var(--text-muted);
+            font-size: 12px;
+            padding-right: 8px;
+        }
+
+        .input-box .spinners {
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--glass-border);
+        }
+
+        .input-box .spinners button {
+            padding: 6px 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .input-box .spinners button:first-child {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .input-box .spinners button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .qty-select {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 12px;
+            padding: 0 12px;
+            cursor: pointer;
+        }
+
+        .slider-row {
+            margin-bottom: 12px;
+        }
+
+        .pct-slider {
+            width: 100%;
+            height: 4px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .pct-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid var(--bg-primary);
+        }
+
+        .pct-marks {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+        }
+
+        .pct-marks span {
+            font-size: 10px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .pct-marks span:hover {
+            color: var(--text-primary);
+        }
+
+        .tpsl-section {
+            margin-bottom: 12px;
+        }
+
+        .tpsl-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .tpsl-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .tpsl-check input { display: none; }
+
+        .tpsl-check .cmark {
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--glass-border);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tpsl-check input:checked + .cmark {
+            background: var(--cyan);
+            border-color: var(--cyan);
+        }
+
+        .tpsl-check input:checked + .cmark::after {
+            content: '✓';
+            color: #000;
+            font-size: 10px;
+        }
+
+        .advanced-btn {
+            font-size: 11px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .advanced-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .tpsl-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tpsl-input-row {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .tpsl-label {
+            padding: 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+            min-width: 30px;
+        }
+
+        .tpsl-input {
+            flex: 1;
+            padding: 12px 8px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .tpsl-type {
+            padding: 8px 12px;
+            background: transparent;
+            border: none;
+            border-left: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .ls-btns {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .long-btn, .short-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .long-btn {
+            background: var(--accent-gradient);
+            color: #000;
+        }
+
+        .short-btn {
+            background: var(--pink);
+            color: #fff;
+        }
+
+        .long-btn:hover, .short-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .cost-left, .cost-right {
+            font-size: 11px;
+        }
+
+        .cost-right { text-align: right; }
+
+        .cost-label {
+            color: var(--text-muted);
+            margin-right: 4px;
+        }
+
+        .cost-row span:not(.cost-label) {
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .eff-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .eff-row span {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .eff-row select {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            color: var(--text-primary);
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+
+        .vip-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .vip-icon { font-size: 24px; }
+
+        .vip-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vip-level {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .vip-fees {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .margin-box {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .margin-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .margin-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        .margin-row .safe { color: #00c853; }
 
         /* ===== WIDGETS SECTION ===== */
         .widgets-section {
@@ -3166,6 +3691,493 @@
             100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
         }
 
+        /* ===== FLOATING QUICK TRADE BUTTON ===== */
+        .quick-trade-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-gradient);
+            border-radius: 50px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 8px 32px var(--purple-glow), 0 0 20px rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            animation: fabPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes fabPulse {
+            0%, 100% { box-shadow: 0 8px 32px var(--purple-glow), 0 0 20px rgba(0, 212, 255, 0.3); }
+            50% { box-shadow: 0 8px 40px var(--purple-glow), 0 0 40px rgba(0, 212, 255, 0.5); }
+        }
+
+        .quick-trade-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 48px var(--purple-glow), 0 0 50px rgba(0, 212, 255, 0.5);
+        }
+
+        .fab-icon {
+            font-size: 20px;
+        }
+
+        .fab-text {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--bg-primary);
+            letter-spacing: 1px;
+        }
+
+        .fab-hint {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--cyan);
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .quick-trade-fab:hover .fab-hint {
+            opacity: 1;
+        }
+
+        /* Shortcuts Hint Bar */
+        .shortcuts-hint {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            z-index: 999;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .shortcuts-hint b {
+            color: var(--cyan);
+            background: rgba(0, 212, 255, 0.15);
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin: 0 2px;
+        }
+
+        /* ===== QUICK TRADE MODAL ===== */
+        .quick-trade-modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            width: 420px;
+            max-width: 95vw;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 40px var(--purple-glow);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .qtm-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(138, 43, 226, 0.1));
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .qtm-pair {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .qtm-symbol {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .qtm-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cyan);
+        }
+
+        .qtm-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .qtm-close:hover {
+            background: rgba(255, 20, 147, 0.2);
+            border-color: var(--pink);
+            color: var(--pink);
+        }
+
+        /* Mini Order Book */
+        .qtm-mini-book {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .qtm-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            padding: 4px 0;
+        }
+
+        .qtm-row.ask span:first-child { color: var(--pink); }
+        .qtm-row.bid span:first-child { color: var(--cyan); }
+        .qtm-row span:last-child { color: var(--text-muted); }
+
+        .qtm-spread {
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            padding: 8px 0;
+            border-top: 1px dashed var(--glass-border);
+            border-bottom: 1px dashed var(--glass-border);
+            margin: 8px 0;
+        }
+
+        /* Form */
+        .qtm-form {
+            padding: 20px;
+        }
+
+        .qtm-leverage {
+            margin-bottom: 16px;
+        }
+
+        .qtm-leverage > span {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .qtm-lev-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .qtm-lev-btns button {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .qtm-lev-btns button:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .qtm-lev-btns button.active {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .qtm-amount {
+            margin-bottom: 20px;
+        }
+
+        .qtm-amount label {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .qtm-amount-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .qtm-amount-row input {
+            flex: 1;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .qtm-amount-row input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .qtm-quick-amounts {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .qtm-quick-amounts button {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            color: var(--text-muted);
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .qtm-quick-amounts button:hover {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--cyan);
+        }
+
+        /* TP/SL in Quick Trade */
+        .qtm-tpsl {
+            margin-bottom: 16px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .qtm-tpsl-header {
+            margin-bottom: 12px;
+        }
+
+        .qtm-tpsl-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .qtm-tpsl-toggle input {
+            display: none;
+        }
+
+        .qtm-checkmark {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--glass-border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .qtm-tpsl-toggle input:checked + .qtm-checkmark {
+            background: var(--cyan);
+            border-color: var(--cyan);
+        }
+
+        .qtm-tpsl-toggle input:checked + .qtm-checkmark::after {
+            content: '✓';
+            color: #000;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .qtm-tpsl-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .qtm-tpsl-inputs.hidden {
+            display: none;
+        }
+
+        .qtm-tpsl-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qtm-tpsl-label {
+            width: 24px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .qtm-tpsl-label.tp {
+            color: var(--cyan);
+        }
+
+        .qtm-tpsl-label.sl {
+            color: var(--pink);
+        }
+
+        .qtm-tpsl-row input {
+            width: 90px;
+            padding: 8px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .qtm-tpsl-row input:focus {
+            border-color: var(--cyan);
+        }
+
+        .qtm-tpsl-row input::placeholder {
+            color: var(--text-muted);
+            font-size: 10px;
+        }
+
+        .qtm-tpsl-pct {
+            width: 45px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            text-align: right;
+            color: var(--text-muted);
+        }
+
+        .qtm-quick-pct {
+            display: flex;
+            gap: 4px;
+        }
+
+        .qtm-quick-pct button {
+            padding: 6px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .qtm-tpsl-row:first-child .qtm-quick-pct button {
+            color: var(--cyan);
+        }
+
+        .qtm-tpsl-row:last-child .qtm-quick-pct button {
+            color: var(--pink);
+        }
+
+        .qtm-quick-pct button:hover {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: var(--cyan);
+            transform: scale(1.05);
+        }
+
+        .qtm-tpsl-row:last-child .qtm-quick-pct button:hover {
+            background: rgba(255, 20, 147, 0.15);
+            border-color: var(--pink);
+        }
+
+        .qtm-quick-pct button.active {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: var(--cyan);
+        }
+
+        .qtm-tpsl-row:last-child .qtm-quick-pct button.active {
+            background: rgba(255, 20, 147, 0.2);
+            border-color: var(--pink);
+        }
+
+        .qtm-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .qtm-long, .qtm-short {
+            flex: 1;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .qtm-long {
+            background: var(--accent-gradient);
+            color: var(--bg-primary);
+        }
+
+        .qtm-short {
+            background: var(--pink);
+            color: white;
+        }
+
+        .qtm-long:hover, .qtm-short:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+        }
+
+        .qtm-long:active, .qtm-short:active {
+            transform: scale(0.98);
+        }
+
+        .qtm-btn-hint {
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .qtm-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .qtm-info b {
+            color: var(--text-primary);
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1200px) {
             .right-sidebar {
@@ -3797,6 +4809,17 @@
                         <span class="ob-spread-label" id="spreadValue">Spread: 0.02%</span>
                     </div>
                     <div id="bidsList"></div>
+                    <!-- Buy/Sell Ratio Bar -->
+                    <div class="ob-ratio-bar">
+                        <div class="ob-ratio-buy" id="obRatioBuy">
+                            <span>B</span>
+                            <span id="buyPercent">50.00%</span>
+                        </div>
+                        <div class="ob-ratio-sell" id="obRatioSell">
+                            <span id="sellPercent">50.00%</span>
+                            <span>S</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="ob-content" id="tradesContent" style="display: none;">
                     <div class="ob-header">
@@ -3810,82 +4833,162 @@
                 </div>
             </div>
 
-            <!-- Trade Form -->
-            <div class="trade-section">
-                <div class="trade-tabs">
-                    <button class="trade-tab buy active" onclick="setTradeType('buy')">BUY</button>
-                    <button class="trade-tab sell" onclick="setTradeType('sell')">SELL</button>
+            <!-- Place Trades Dropdown -->
+            <div class="place-trades-section">
+                <div class="place-trades-header" onclick="toggleTradeForm()">
+                    <span>📈 Place Trade</span>
+                    <span class="place-trades-toggle" id="tradeFormToggle">▼</span>
                 </div>
-
-                <!-- Leverage Slider -->
-                <div class="leverage-section">
-                    <div class="leverage-header">
-                        <span class="leverage-label">Leverage</span>
-                        <span class="leverage-value" id="leverageValue">10x</span>
-                    </div>
-                    <input type="range" class="leverage-slider" id="leverageSlider" min="1" max="100" value="10" oninput="updateLeverage()">
-                    <div class="leverage-marks">
-                        <span>1x</span>
-                        <span>25x</span>
-                        <span>50x</span>
-                        <span>75x</span>
-                        <span>100x</span>
+                <div class="trade-form-content" id="tradeFormContent">
+                <!-- Cross/Isolated + Leverage Row -->
+                <div class="trade-top-row">
+                    <select class="margin-select" id="marginMode">
+                        <option value="cross">Cross</option>
+                        <option value="isolated">Isolated</option>
+                    </select>
+                    <div class="leverage-btn" id="leverageBtn" onclick="openLeverageModal()">
+                        <span id="leverageDisplay">20X</span>
                     </div>
                 </div>
 
-                <div class="order-types">
-                    <button class="order-type-btn active">Limit</button>
-                    <button class="order-type-btn">Market</button>
-                    <button class="order-type-btn">Stop</button>
+                <!-- Open/Close Tabs -->
+                <div class="oc-tabs">
+                    <button class="oc-tab active" onclick="setOcTab(this, 'open')">Open</button>
+                    <button class="oc-tab" onclick="setOcTab(this, 'close')">Close</button>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-label">
-                        <span>Price</span>
-                        <span id="priceApprox">≈ $88,500</span>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" value="88500.00" id="priceInput">
-                        <div class="input-suffix">USDT</div>
-                    </div>
+                <!-- Order Types -->
+                <div class="order-types-row">
+                    <button class="ot-btn active" onclick="setOtBtn(this)">Limit</button>
+                    <button class="ot-btn" onclick="setOtBtn(this)">Market</button>
+                    <button class="ot-btn" onclick="setOtBtn(this)">Trigger ▾</button>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-label">
-                        <span>Amount</span>
-                        <span>Avail: 5,000 USDT</span>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" placeholder="0.00" id="amountInput">
-                        <div class="input-suffix" id="amountSuffix">BTC</div>
-                    </div>
-                    <div class="percent-btns">
-                        <button class="percent-btn" onclick="setPercent(25)">25%</button>
-                        <button class="percent-btn" onclick="setPercent(50)">50%</button>
-                        <button class="percent-btn" onclick="setPercent(75)">75%</button>
-                        <button class="percent-btn" onclick="setPercent(100)">100%</button>
-                    </div>
+                <!-- Available -->
+                <div class="avail-row">
+                    <span>Available</span>
+                    <span id="availBalance">0.0000 USDT</span>
                 </div>
 
-                <div class="order-summary">
-                    <div class="summary-row">
-                        <span>Order Value</span>
-                        <span id="orderValue">0.00 USDT</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Fee (0.1%)</span>
-                        <span id="orderFee">0.00 USDT</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Total</span>
-                        <span id="orderTotal">0.00 USDT</span>
+                <!-- Order Price -->
+                <div class="input-row">
+                    <label>Order Price</label>
+                    <div class="input-box">
+                        <input type="text" id="priceInput" value="86,802.9">
+                        <button class="last-btn" onclick="setLastPrice()">Last</button>
+                        <span class="currency">USDT</span>
+                        <div class="spinners">
+                            <button onclick="adjustPrice(1)">+</button>
+                            <button onclick="adjustPrice(-1)">−</button>
+                        </div>
                     </div>
                 </div>
 
-                <button class="submit-btn buy" id="submitBtn" onclick="openConfirmModal()">BUY BTC</button>
+                <!-- Quantity -->
+                <div class="input-row">
+                    <label>Quantity</label>
+                    <div class="input-box">
+                        <input type="text" id="amountInput" placeholder="0" value="">
+                        <select class="qty-select" id="qtyAsset">
+                            <option value="BTC">BTC ▾</option>
+                            <option value="USDT">USDT</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Percent Slider -->
+                <div class="slider-row">
+                    <input type="range" class="pct-slider" id="pctSlider" min="0" max="100" value="0" oninput="setPctSlider(this.value)">
+                    <div class="pct-marks">
+                        <span onclick="setPct(0)">0%</span>
+                        <span onclick="setPct(25)">25%</span>
+                        <span onclick="setPct(50)">50%</span>
+                        <span onclick="setPct(75)">75%</span>
+                        <span onclick="setPct(100)">100%</span>
+                    </div>
+                </div>
+
+                <!-- TP/SL -->
+                <div class="tpsl-section">
+                    <div class="tpsl-header">
+                        <label class="tpsl-check">
+                            <input type="checkbox" id="tpslEnabled" checked onchange="toggleTpsl()">
+                            <span class="cmark"></span>
+                            TP / SL
+                        </label>
+                        <span class="advanced-btn">Advanced ▶</span>
+                    </div>
+                    <div class="tpsl-inputs" id="tpslInputs">
+                        <div class="tpsl-input-row">
+                            <span class="tpsl-label">TP</span>
+                            <input type="text" class="tpsl-input" placeholder="" id="tpInput">
+                            <select class="tpsl-type">
+                                <option>Price (USDT) ▾</option>
+                                <option>ROI %</option>
+                            </select>
+                        </div>
+                        <div class="tpsl-input-row">
+                            <span class="tpsl-label">SL</span>
+                            <input type="text" class="tpsl-input" placeholder="" id="slInput">
+                            <select class="tpsl-type">
+                                <option>Price (USDT) ▾</option>
+                                <option>ROI %</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Long/Short Buttons -->
+                <div class="ls-btns">
+                    <button class="long-btn" onclick="openPosition('long')">Open long</button>
+                    <button class="short-btn" onclick="openPosition('short')">Open short</button>
+                </div>
+
+                <!-- Cost Info -->
+                <div class="cost-row">
+                    <div class="cost-left">
+                        <div><span class="cost-label">Cost</span></div>
+                        <div><span id="longCost">0.0 USDT</span></div>
+                        <div><span class="cost-label">Max</span></div>
+                        <div><span id="longMax">0.0 BTC</span></div>
+                    </div>
+                    <div class="cost-right">
+                        <div><span class="cost-label">Cost</span></div>
+                        <div><span id="shortCost">0.0 USDT</span></div>
+                        <div><span class="cost-label">Max</span></div>
+                        <div><span id="shortMax">0.0 BTC</span></div>
+                    </div>
+                </div>
+
+                <!-- Effective Time -->
+                <div class="eff-row">
+                    <span>Effective Time</span>
+                    <select id="effTime">
+                        <option>GTC ▾</option>
+                        <option>IOC</option>
+                        <option>FOK</option>
+                    </select>
+                </div>
+
+                <!-- VIP Info -->
+                <div class="vip-row">
+                    <span class="vip-icon">🛡️</span>
+                    <div class="vip-info">
+                        <span class="vip-level">VIP 0</span>
+                        <span class="vip-fees">Maker 0.0300%    Taker 0.0600%</span>
+                    </div>
+                </div>
+
+                <!-- Margin Info -->
+                <div class="margin-box">
+                    <div class="margin-title">Margin</div>
+                    <div class="margin-row"><span>USDT · Cross</span></div>
+                    <div class="margin-row"><span>Margin Rate</span><span class="safe">🟡 0.0%</span></div>
+                </div>
+                </div>
             </div>
 
-            <!-- Widgets -->
+            <!-- Widgets Section -->
             <div class="widgets-section">
                 <!-- Fear & Greed -->
                 <div class="fear-greed">
@@ -3929,6 +5032,119 @@
                     <div id="newsFeed">
                         <!-- Filled by JS -->
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Quick Trade Button -->
+    <div class="quick-trade-fab" id="quickTradeFab" onclick="openQuickTrade()">
+        <span class="fab-icon">⚡</span>
+        <span class="fab-text">Trade</span>
+        <div class="fab-hint">Press T</div>
+    </div>
+
+    <!-- Keyboard Shortcuts Hint -->
+    <div class="shortcuts-hint" id="shortcutsHint">
+        <span>⌨️ Shortcuts: <b>T</b> Trade • <b>B</b> Buy • <b>S</b> Sell • <b>Esc</b> Close</span>
+    </div>
+
+    <!-- Quick Trade Modal -->
+    <div class="modal-overlay" id="quickTradeModal">
+        <div class="quick-trade-modal">
+            <div class="qtm-header">
+                <div class="qtm-pair">
+                    <span class="qtm-symbol" id="qtmSymbol">BTC/USDT</span>
+                    <span class="qtm-price" id="qtmPrice">$87,500.00</span>
+                </div>
+                <button class="qtm-close" onclick="closeQuickTrade()">✕</button>
+            </div>
+            
+            <div class="qtm-mini-book">
+                <div class="qtm-asks" id="qtmAsks">
+                    <div class="qtm-row ask"><span>87,502.1</span><span>0.523</span></div>
+                    <div class="qtm-row ask"><span>87,501.5</span><span>0.891</span></div>
+                    <div class="qtm-row ask"><span>87,500.8</span><span>1.204</span></div>
+                </div>
+                <div class="qtm-spread">Spread: 0.01%</div>
+                <div class="qtm-bids" id="qtmBids">
+                    <div class="qtm-row bid"><span>87,499.2</span><span>0.756</span></div>
+                    <div class="qtm-row bid"><span>87,498.8</span><span>1.102</span></div>
+                    <div class="qtm-row bid"><span>87,498.1</span><span>0.445</span></div>
+                </div>
+            </div>
+
+            <div class="qtm-form">
+                <div class="qtm-leverage">
+                    <span>Leverage</span>
+                    <div class="qtm-lev-btns">
+                        <button onclick="setQtmLev(5)">5x</button>
+                        <button onclick="setQtmLev(10)">10x</button>
+                        <button class="active" onclick="setQtmLev(20)">20x</button>
+                        <button onclick="setQtmLev(50)">50x</button>
+                        <button onclick="setQtmLev(100)">100x</button>
+                    </div>
+                </div>
+                
+                <div class="qtm-amount">
+                    <label>Amount (USDT)</label>
+                    <div class="qtm-amount-row">
+                        <input type="text" id="qtmAmount" value="100" placeholder="0">
+                        <div class="qtm-quick-amounts">
+                            <button onclick="setQtmAmount(100)">$100</button>
+                            <button onclick="setQtmAmount(500)">$500</button>
+                            <button onclick="setQtmAmount(1000)">$1K</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TP/SL Section -->
+                <div class="qtm-tpsl">
+                    <div class="qtm-tpsl-header">
+                        <label class="qtm-tpsl-toggle">
+                            <input type="checkbox" id="qtmTpslEnabled" checked onchange="toggleQtmTpsl()">
+                            <span class="qtm-checkmark"></span>
+                            TP / SL
+                        </label>
+                    </div>
+                    <div class="qtm-tpsl-inputs" id="qtmTpslInputs">
+                        <div class="qtm-tpsl-row">
+                            <span class="qtm-tpsl-label tp">TP</span>
+                            <input type="text" id="qtmTp" placeholder="Price">
+                            <div class="qtm-quick-pct">
+                                <button onclick="setQtmTpPct(1)">+1%</button>
+                                <button onclick="setQtmTpPct(2)">+2%</button>
+                                <button onclick="setQtmTpPct(5)">+5%</button>
+                            </div>
+                            <span class="qtm-tpsl-pct" id="qtmTpPct">+0%</span>
+                        </div>
+                        <div class="qtm-tpsl-row">
+                            <span class="qtm-tpsl-label sl">SL</span>
+                            <input type="text" id="qtmSl" placeholder="Price">
+                            <div class="qtm-quick-pct">
+                                <button onclick="setQtmSlPct(1)">-1%</button>
+                                <button onclick="setQtmSlPct(2)">-2%</button>
+                                <button onclick="setQtmSlPct(5)">-5%</button>
+                            </div>
+                            <span class="qtm-tpsl-pct" id="qtmSlPct">-0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qtm-buttons">
+                    <button class="qtm-long" onclick="executeQuickTrade('long')">
+                        <span class="qtm-btn-label">LONG</span>
+                        <span class="qtm-btn-hint">[B]</span>
+                    </button>
+                    <button class="qtm-short" onclick="executeQuickTrade('short')">
+                        <span class="qtm-btn-label">SHORT</span>
+                        <span class="qtm-btn-hint">[S]</span>
+                    </button>
+                </div>
+                
+                <div class="qtm-info">
+                    <span>Est. Liquidation: <b id="qtmLiq">$82,150</b></span>
+                    <span>Fee: <b>0.06%</b></span>
                 </div>
             </div>
         </div>
@@ -4915,6 +6131,25 @@
                     second: '2-digit'
                 });
             }
+
+            // Update buy/sell ratio bar
+            const totalBidVolume = bids.reduce((sum, b) => sum + (b.price * b.amount), 0);
+            const totalAskVolume = asks.reduce((sum, a) => sum + (a.price * a.amount), 0);
+            const totalVolume = totalBidVolume + totalAskVolume;
+            const buyPercent = ((totalBidVolume / totalVolume) * 100).toFixed(2);
+            const sellPercent = ((totalAskVolume / totalVolume) * 100).toFixed(2);
+            
+            const buyBar = document.getElementById('obRatioBuy');
+            const sellBar = document.getElementById('obRatioSell');
+            const buyPercentEl = document.getElementById('buyPercent');
+            const sellPercentEl = document.getElementById('sellPercent');
+            
+            if (buyBar && sellBar) {
+                buyBar.style.width = buyPercent + '%';
+                sellBar.style.width = sellPercent + '%';
+            }
+            if (buyPercentEl) buyPercentEl.textContent = buyPercent + '%';
+            if (sellPercentEl) sellPercentEl.textContent = sellPercent + '%';
         }
 
         function addLiveTrade(trade) {
@@ -5157,41 +6392,376 @@
             }
         }
 
-        // ===== TRADE FORM =====
-        function setTradeType(type) {
-            tradeType = type;
-            document.querySelectorAll('.trade-tab').forEach(t => t.classList.remove('active'));
-            document.querySelector(`.trade-tab.${type}`).classList.add('active');
-            const btn = document.getElementById('submitBtn');
-            btn.className = `submit-btn ${type}`;
-            btn.textContent = `${type.toUpperCase()} ${selectedPairData.symbol}`;
+        // ===== TRADE FORM (Bitunix Style) =====
+        let currentLeverage = 20;
+
+        function setOcTab(el, mode) {
+            document.querySelectorAll('.oc-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
         }
 
-        function updateLeverage() {
-            leverage = document.getElementById('leverageSlider').value;
-            document.getElementById('leverageValue').textContent = leverage + 'x';
+        function setOtBtn(el) {
+            document.querySelectorAll('.ot-btn').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
         }
 
-        function setPercent(pct) {
+        function setLastPrice() {
+            const price = document.getElementById('spreadPrice')?.textContent?.replace(/[^0-9.]/g, '') || '86802.9';
+            document.getElementById('priceInput').value = parseFloat(price).toLocaleString();
+        }
+
+        function adjustPrice(delta) {
+            const input = document.getElementById('priceInput');
+            const currentVal = parseFloat(input.value.replace(/,/g, '')) || 0;
+            const newVal = currentVal + delta;
+            input.value = newVal.toLocaleString();
+        }
+
+        function setPct(pct) {
+            document.getElementById('pctSlider').value = pct;
+            setPctSlider(pct);
+        }
+
+        function setPctSlider(pct) {
             const avail = 5000;
-            const price = parseFloat(document.getElementById('priceInput').value);
-            const amount = (avail * (pct / 100) / price).toFixed(4);
+            const price = parseFloat(document.getElementById('priceInput').value.replace(/,/g, '')) || 86802.9;
+            const amount = (avail * (pct / 100) * currentLeverage / price).toFixed(4);
             document.getElementById('amountInput').value = amount;
-            updateOrderSummary();
+            updateCostInfo();
         }
 
-        function updateOrderSummary() {
-            const price = parseFloat(document.getElementById('priceInput').value) || 0;
+        function updateCostInfo() {
+            const price = parseFloat(document.getElementById('priceInput').value.replace(/,/g, '')) || 0;
             const amount = parseFloat(document.getElementById('amountInput').value) || 0;
-            const value = price * amount;
-            const fee = value * 0.001;
-            document.getElementById('orderValue').textContent = value.toFixed(2) + ' USDT';
-            document.getElementById('orderFee').textContent = fee.toFixed(2) + ' USDT';
-            document.getElementById('orderTotal').textContent = (value + fee).toFixed(2) + ' USDT';
+            const cost = (price * amount / currentLeverage).toFixed(2);
+            
+            document.getElementById('longCost').textContent = cost + ' USDT';
+            document.getElementById('shortCost').textContent = cost + ' USDT';
+            document.getElementById('longMax').textContent = amount + ' BTC';
+            document.getElementById('shortMax').textContent = amount + ' BTC';
         }
 
-        document.getElementById('amountInput').addEventListener('input', updateOrderSummary);
-        document.getElementById('priceInput').addEventListener('input', updateOrderSummary);
+        function openPosition(direction) {
+            const price = document.getElementById('priceInput').value;
+            const qty = document.getElementById('amountInput').value;
+            
+            if (!qty || parseFloat(qty) <= 0) {
+                showToast('error', 'Invalid Order', 'Please enter a quantity');
+                return;
+            }
+            
+            showToast('success', `${direction.toUpperCase()} Order`, `Opening ${direction} position: ${qty} BTC @ $${price} (${currentLeverage}X)`);
+            playSound();
+        }
+
+        // ===== QUICK TRADE MODAL =====
+        let qtmLeverage = 20;
+        let quickTradeOpen = false;
+
+        function openQuickTrade() {
+            document.getElementById('quickTradeModal').classList.add('active');
+            quickTradeOpen = true;
+            updateQtmData();
+            playSound('open');
+        }
+
+        function closeQuickTrade() {
+            document.getElementById('quickTradeModal').classList.remove('active');
+            quickTradeOpen = false;
+        }
+
+        function updateQtmData() {
+            // Update modal with current price data
+            const price = document.getElementById('spreadPrice')?.textContent || '$87,500.00';
+            document.getElementById('qtmPrice').textContent = price;
+            document.getElementById('qtmSymbol').textContent = selectedPairData.symbol + '/USDT';
+            
+            // Update mini order book from live data
+            if (liveOrderBook.asks.length && liveOrderBook.bids.length) {
+                const formatP = (p) => p.toLocaleString(undefined, {maximumFractionDigits: 2});
+                const formatA = (a) => a.toFixed(3);
+                
+                document.getElementById('qtmAsks').innerHTML = liveOrderBook.asks.slice(0, 3).reverse().map(a => 
+                    `<div class="qtm-row ask"><span>${formatP(a.price)}</span><span>${formatA(a.amount)}</span></div>`
+                ).join('');
+                
+                document.getElementById('qtmBids').innerHTML = liveOrderBook.bids.slice(0, 3).map(b => 
+                    `<div class="qtm-row bid"><span>${formatP(b.price)}</span><span>${formatA(b.amount)}</span></div>`
+                ).join('');
+            }
+        }
+
+        function setQtmLev(lev) {
+            qtmLeverage = lev;
+            document.querySelectorAll('.qtm-lev-btns button').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            updateQtmLiq();
+            playSound('click');
+        }
+
+        function setQtmAmount(amt) {
+            document.getElementById('qtmAmount').value = amt;
+            updateQtmLiq();
+            playSound('click');
+        }
+
+        function updateQtmLiq() {
+            const price = parseFloat(document.getElementById('spreadPrice')?.textContent?.replace(/[^0-9.]/g, '') || 87500);
+            const liqPrice = price * (1 - (1 / qtmLeverage) * 0.9);
+            document.getElementById('qtmLiq').textContent = '$' + liqPrice.toLocaleString(undefined, {maximumFractionDigits: 0});
+        }
+
+        function toggleQtmTpsl() {
+            const enabled = document.getElementById('qtmTpslEnabled').checked;
+            const inputs = document.getElementById('qtmTpslInputs');
+            if (inputs) {
+                inputs.classList.toggle('hidden', !enabled);
+            }
+            playSound('click');
+        }
+
+        // Update TP/SL percentages as user types
+        document.getElementById('qtmTp')?.addEventListener('input', function() {
+            const price = parseFloat(document.getElementById('spreadPrice')?.textContent?.replace(/[^0-9.]/g, '') || 87500);
+            const tp = parseFloat(this.value) || 0;
+            if (tp > 0) {
+                const pct = ((tp - price) / price * 100).toFixed(1);
+                document.getElementById('qtmTpPct').textContent = (pct >= 0 ? '+' : '') + pct + '%';
+                document.getElementById('qtmTpPct').style.color = pct >= 0 ? 'var(--cyan)' : 'var(--pink)';
+            } else {
+                document.getElementById('qtmTpPct').textContent = '+0%';
+                document.getElementById('qtmTpPct').style.color = 'var(--text-muted)';
+            }
+        });
+
+        document.getElementById('qtmSl')?.addEventListener('input', function() {
+            const price = parseFloat(document.getElementById('spreadPrice')?.textContent?.replace(/[^0-9.]/g, '') || 87500);
+            const sl = parseFloat(this.value) || 0;
+            if (sl > 0) {
+                const pct = ((sl - price) / price * 100).toFixed(1);
+                document.getElementById('qtmSlPct').textContent = (pct >= 0 ? '+' : '') + pct + '%';
+                document.getElementById('qtmSlPct').style.color = pct >= 0 ? 'var(--cyan)' : 'var(--pink)';
+            } else {
+                document.getElementById('qtmSlPct').textContent = '-0%';
+                document.getElementById('qtmSlPct').style.color = 'var(--text-muted)';
+            }
+        });
+
+        function setQtmTpPct(pct) {
+            const price = parseFloat(document.getElementById('spreadPrice')?.textContent?.replace(/[^0-9.]/g, '') || 87500);
+            const tpPrice = price * (1 + pct / 100);
+            document.getElementById('qtmTp').value = tpPrice.toFixed(2);
+            document.getElementById('qtmTpPct').textContent = '+' + pct + '%';
+            document.getElementById('qtmTpPct').style.color = 'var(--cyan)';
+            
+            // Update active state on buttons
+            document.querySelectorAll('.qtm-tpsl-row:first-child .qtm-quick-pct button').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            playSound('click');
+        }
+
+        function setQtmSlPct(pct) {
+            const price = parseFloat(document.getElementById('spreadPrice')?.textContent?.replace(/[^0-9.]/g, '') || 87500);
+            const slPrice = price * (1 - pct / 100);
+            document.getElementById('qtmSl').value = slPrice.toFixed(2);
+            document.getElementById('qtmSlPct').textContent = '-' + pct + '%';
+            document.getElementById('qtmSlPct').style.color = 'var(--pink)';
+            
+            // Update active state on buttons
+            document.querySelectorAll('.qtm-tpsl-row:last-child .qtm-quick-pct button').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            playSound('click');
+        }
+
+        function executeQuickTrade(direction) {
+            const amount = document.getElementById('qtmAmount').value;
+            const price = document.getElementById('qtmPrice').textContent;
+            const tpslEnabled = document.getElementById('qtmTpslEnabled').checked;
+            const tp = document.getElementById('qtmTp').value;
+            const sl = document.getElementById('qtmSl').value;
+            
+            if (!amount || parseFloat(amount) <= 0) {
+                showToast('error', 'Invalid Amount', 'Please enter a valid amount');
+                playSound('error');
+                return;
+            }
+
+            // Play trade sound
+            playSound('trade');
+            
+            // Build message with TP/SL if set
+            let msg = `${selectedPairData.symbol} ${direction} $${amount} @ ${price} (${qtmLeverage}x)`;
+            if (tpslEnabled && (tp || sl)) {
+                msg += '\n';
+                if (tp) msg += `TP: $${tp} `;
+                if (sl) msg += `SL: $${sl}`;
+            }
+            
+            // Show success with confetti
+            showToast('success', `${direction.toUpperCase()} Order Placed! 🚀`, msg);
+            
+            // Trigger confetti
+            triggerConfetti();
+            
+            closeQuickTrade();
+        }
+
+        // ===== KEYBOARD SHORTCUTS =====
+        document.addEventListener('keydown', function(e) {
+            // Don't trigger if typing in an input
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            switch(e.key.toLowerCase()) {
+                case 't':
+                    if (!quickTradeOpen) {
+                        openQuickTrade();
+                    }
+                    break;
+                case 'b':
+                    if (quickTradeOpen) {
+                        executeQuickTrade('long');
+                    }
+                    break;
+                case 's':
+                    if (quickTradeOpen) {
+                        executeQuickTrade('short');
+                    }
+                    break;
+                case 'escape':
+                    if (quickTradeOpen) {
+                        closeQuickTrade();
+                    }
+                    break;
+            }
+        });
+
+        // ===== SOUND EFFECTS =====
+        const sounds = {
+            click: { freq: 800, duration: 50, type: 'sine' },
+            open: { freq: 600, duration: 100, type: 'sine', freq2: 900 },
+            trade: { freq: 400, duration: 150, type: 'square', freq2: 600, freq3: 800 },
+            error: { freq: 200, duration: 200, type: 'sawtooth' },
+            success: { freq: 523, duration: 100, type: 'sine', freq2: 659, freq3: 784 }
+        };
+
+        let audioCtx = null;
+
+        function playSound(type = 'click') {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                
+                const sound = sounds[type] || sounds.click;
+                
+                const playTone = (freq, delay = 0) => {
+                    const oscillator = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    
+                    oscillator.frequency.value = freq;
+                    oscillator.type = sound.type;
+                    
+                    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime + delay);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + delay + sound.duration / 1000);
+                    
+                    oscillator.start(audioCtx.currentTime + delay);
+                    oscillator.stop(audioCtx.currentTime + delay + sound.duration / 1000);
+                };
+                
+                playTone(sound.freq, 0);
+                if (sound.freq2) playTone(sound.freq2, 0.08);
+                if (sound.freq3) playTone(sound.freq3, 0.16);
+                
+            } catch (e) {
+                console.log('Audio not supported');
+            }
+        }
+
+        // ===== CONFETTI EFFECT =====
+        function triggerConfetti() {
+            const colors = ['#00d4ff', '#8a2be2', '#ff1493', '#00ff88'];
+            const confettiCount = 100;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: ${Math.random() * 10 + 5}px;
+                    height: ${Math.random() * 10 + 5}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    left: ${Math.random() * 100}vw;
+                    top: -20px;
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                    pointer-events: none;
+                    z-index: 10000;
+                    animation: confettiFall ${Math.random() * 2 + 2}s linear forwards;
+                `;
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        // Add confetti animation style
+        const confettiStyle = document.createElement('style');
+        confettiStyle.textContent = `
+            @keyframes confettiFall {
+                0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(confettiStyle);
+
+        function toggleTradeForm() {
+            const content = document.getElementById('tradeFormContent');
+            const toggle = document.getElementById('tradeFormToggle');
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                toggle.classList.remove('open');
+            } else {
+                content.classList.add('expanded');
+                toggle.classList.add('open');
+            }
+        }
+
+        function toggleNews() {
+            const feed = document.getElementById('newsFeed');
+            const toggle = document.getElementById('newsToggle');
+            if (feed.classList.contains('news-collapsed')) {
+                feed.classList.remove('news-collapsed');
+                feed.classList.add('news-expanded');
+                toggle.classList.add('open');
+            } else {
+                feed.classList.remove('news-expanded');
+                feed.classList.add('news-collapsed');
+                toggle.classList.remove('open');
+            }
+        }
+
+        function toggleTpsl() {
+            const enabled = document.getElementById('tpslEnabled').checked;
+            const inputs = document.getElementById('tpslInputs');
+            if (inputs) {
+                inputs.style.display = enabled ? 'flex' : 'none';
+            }
+        }
+
+        function openLeverageModal() {
+            const newLev = prompt('Enter leverage (1-125):', currentLeverage);
+            if (newLev && !isNaN(newLev)) {
+                currentLeverage = Math.min(125, Math.max(1, parseInt(newLev)));
+                document.getElementById('leverageDisplay').textContent = currentLeverage + 'X';
+                updateCostInfo();
+            }
+        }
+
+        // Input listeners
+        document.getElementById('amountInput')?.addEventListener('input', updateCostInfo);
+        document.getElementById('priceInput')?.addEventListener('input', updateCostInfo);
 
         // ===== MODALS =====
         function openWalletModal() {
